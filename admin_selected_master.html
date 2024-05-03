@@ -46,7 +46,7 @@
     <main class="flex-md-grow-1 d-flex">
         <div class="container-fluid flex-grow-1 d-flex">
             <div class="row flex-grow-1">
-                <div class="col-12 col-lg-3 bg-dark_grey shadow_r">
+                <div class="col-12 col-lg-3 bg-dark_grey shadow_r px-xxl-5 px-5 px-lg-2">
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col-12">
@@ -72,27 +72,38 @@
                     </div>
                     <div class="container">
                         <div class="row mt-5">
-                            <div class="col-12">
-                                <div class="text-field">
+                            <form class="col-12 d-flex">
+                                <div class="text-field flex-grow-1">
                                     <label class="text-field__label" for="vacation">Отпуск</label>
-                                    <input class="text-field__input mb-2" type="date" name="start_vacation" id=""
+                                    <input class="text-field__date mb-2" type="date" name="start_vacation" id=""
                                         placeholder="" value="">
-                                    <input class="text-field__input" type="date" name="end_vacation" id=""
+                                    <input class="text-field__date" type="date" name="end_vacation" id="" placeholder=""
+                                        value="">
+                                </div>
+                                <div class="btn__add">
+                                    <button class="btn_add_self green" type="submit"><i
+                                            class="bi bi-plus-circle-fill"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row mt-5">
+                            <form class="col-12 d-flex">
+                                <div class="text-field flex-grow-1">
+                                    <label class="text-field__label" for="vacation">Больничный</label>
+                                    <input class="text-field__date mb-2" type="date" name="start_seak_leave" id=""
+                                        placeholder="" value="">
+                                    <input class="text-field__date" type="date" name="end_seak_leave" id=""
                                         placeholder="" value="">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="text-field">
-                                    <label class="text-field__label" for="sick_leave">Больничный</label>
-                                    <input class="text-field__input mb-2" type="date" name="start_sick_leave" id=""
-                                        placeholder="" value="">
-                                    <input class="text-field__input" type="date" name="end_sick_leave" id=""
-                                        placeholder="" value="">
+                                <div class="btn__add">
+                                    <button class="btn_add_self green" type="submit"><i
+                                            class="bi bi-plus-circle-fill"></i></button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-danger align-self-center">Удалить мастера</button>
                     </div>
                 </div>
                 <div class="col-12 col-md-9 bg-grey">
@@ -101,10 +112,6 @@
             </div>
         </div>
     </main>
-    <main class="">
-
-    </main>
-
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
