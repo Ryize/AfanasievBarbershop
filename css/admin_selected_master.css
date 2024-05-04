@@ -113,3 +113,38 @@
 
 .btn_add_self:hover {
     font-size: 37px;
+}
+
+
+.btn_del_master {
+    background: #922929;
+    padding: 15px 25px;
+    font-size: 24px;
+    border: #922929;
+    border-radius: 15px;
+    color: #fff;
+    box-shadow: 2px 2px 4px black;
+}
+
+.btn_del_master:hover {
+    font-size: 26px;
+}
+
+.btn_padding {
+    padding-top: 100px;
+}
+
+@media (max-width: 1024px) {
+    .btn_del_master {
+        padding: 15px 25px;
+        font-size: 20px;
+    }
+
+    .btn_del_master:hover {
+        font-size: 22px;
+    }
+
+    .btn_padding {
+        padding: 50px 0 15px 0;
+    }
+}

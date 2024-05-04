@@ -46,7 +46,7 @@
     <main class="flex-md-grow-1 d-flex">
         <div class="container-fluid flex-grow-1 d-flex">
             <div class="row flex-grow-1">
-                <div class="col-12 col-lg-3 bg-dark_grey shadow_r px-xxl-5 px-5 px-lg-2">
+                <div class="col-12 col-lg-3 bg-dark_grey d-row-flex shadow_r px-xxl-5 px-5 px-lg-2">
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col-12">
@@ -72,13 +72,13 @@
                     </div>
                     <div class="container">
                         <div class="row mt-5">
-                            <form class="col-12 d-flex">
+                            <form class="col-12 d-flex" id="vacation">
                                 <div class="text-field flex-grow-1">
-                                    <label class="text-field__label" for="vacation">Отпуск</label>
-                                    <input class="text-field__date mb-2" type="date" name="start_vacation" id=""
+                                    <label class="text-field__label" for="start_vacation_id">Отпуск</label>
+                                    <input class="text-field__date mb-2" type="date" name="start_vacation"
+                                        id="start_vacation_id" placeholder="" value="">
+                                    <input class="text-field__date" type="date" name="end_vacation" id="end_vacation"
                                         placeholder="" value="">
-                                    <input class="text-field__date" type="date" name="end_vacation" id="" placeholder=""
-                                        value="">
                                 </div>
                                 <div class="btn__add">
                                     <button class="btn_add_self green" type="submit"><i
@@ -87,13 +87,13 @@
                             </form>
                         </div>
                         <div class="row mt-5">
-                            <form class="col-12 d-flex">
+                            <form class="col-12 d-flex" id="seak_leave">
                                 <div class="text-field flex-grow-1">
-                                    <label class="text-field__label" for="vacation">Больничный</label>
-                                    <input class="text-field__date mb-2" type="date" name="start_seak_leave" id=""
-                                        placeholder="" value="">
-                                    <input class="text-field__date" type="date" name="end_seak_leave" id=""
-                                        placeholder="" value="">
+                                    <label class="text-field__label" for="start_seak_leave_id">Больничный</label>
+                                    <input class="text-field__date mb-2" type="date" id="start_seak_leave_id"
+                                        name="start_seak_leave" placeholder="" value="">
+                                    <input class="text-field__date" type="date" id="end_seak_leave"
+                                        name="end_seak_leave" placeholder="" value="">
                                 </div>
                                 <div class="btn__add">
                                     <button class="btn_add_self green" type="submit"><i
@@ -102,8 +102,12 @@
                             </form>
                         </div>
                     </div>
-                    <div class="">
-                        <button class="btn btn-danger align-self-center">Удалить мастера</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center btn_padding">
+                                <button class="btn_del_master" type="button">Удалить мастера</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-9 bg-grey">
