@@ -1,0 +1,25 @@
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.chair {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(196, 31, 116);
+}
+
+.card-1 {
+    margin: 0px;
+    padding: 0px;
+    background-color: brown;
+}
+
+.row-chair {
+    background-color: black;
+}
+
+.col {
+    margin: 0px;
+    padding: 0px;
+}
