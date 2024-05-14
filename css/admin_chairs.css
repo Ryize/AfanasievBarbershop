@@ -1,25 +1,53 @@
-p {
-    margin: 0px;
-    padding: 0px;
+.card_body {
+    width: 370px;
+    background-color: #D9D9D9;
+    border-radius: 15px;
 }
 
-.chair {
-    margin: 0px;
-    padding: 0px;
-    background-color: rgb(196, 31, 116);
+.card_container {
+    margin-top: 20px;
 }
 
-.card-1 {
-    margin: 0px;
-    padding: 0px;
-    background-color: brown;
+.card_chair {
+    width: 300px;
+    height: 150px;
+    border: #AA6009 solid 1px;
+    border-radius: 15px;
 }
 
-.row-chair {
-    background-color: black;
+.input_style {
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 5px;
+    height: 1.4rem;
+    border: #AA6009 solid 1px;
+    border-radius: 5px;
 }
 
-.col {
-    margin: 0px;
+.img_master {
     padding: 0px;
+    margin: 0px;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 10px;
+}
+
+#start_time,
+#end_time {
+    padding-left: 25px;
+}
+
+.but_add_work_time {
+    margin-left: 15px;
+    font-size: 35px;
+    color: #0E6827;
+    border: none;
+    background: none;
+
+}
+
+.name_chair {
+    color: white;
+    margin-bottom: 15px;
 }
