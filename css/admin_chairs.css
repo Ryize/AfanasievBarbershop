@@ -1,11 +1,12 @@
 .card_body {
-    width: 370px;
+    width: 360px;
     background-color: #D9D9D9;
     border-radius: 15px;
+    padding-bottom: 25px;
 }
 
 .card_container {
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .card_chair {
