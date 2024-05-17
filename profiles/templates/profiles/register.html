@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Регистрация</h2>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control" id="id_username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="id_email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password1" class="form-label">Пароль</label>
+            <input type="password" class="form-control" id="id_password1" name="password1" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password2" class="form-label">Подтверждение пароля</label>
+            <input type="password" class="form-control" id="id_password2" name="password2" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    </form>
+</div>
+{% endblock %}
