@@ -37,6 +37,7 @@
 #start_time,
 #end_time {
     padding-left: 25px;
+    font-size: 18px;
 }
 
 .but_add_work_time {
@@ -51,4 +52,10 @@
 .name_chair {
     color: white;
     margin-bottom: 15px;
+}
+
+.img_add_chair {
+    width: 150px;
+    height: auto;
+    border-radius: 15px;
 }
