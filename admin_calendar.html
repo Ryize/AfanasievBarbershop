@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/base_style.css">
+    <link rel="stylesheet" href="css/admin_calendar.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Base</title>
+    <title>Calendar</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100 bg-grey">
@@ -43,9 +44,64 @@
             </div>
         </nav>
     </header>
-    <main>
-
+    <main class="d-flex flex-grow-1">
+        <div class="container d-flex flex-grow-1">
+            <div class="row d-flex flex-grow-1 justify-content-center align-content-center" id="calendar">
+                <div class="col"></div>
+            </div>
+        </div>
     </main>
+    <script>
+        function createCalendar(elem, year, month) {
+            elem = document.querySelector(elem)
+
+            let mon = month - 1
+            let d = new Date(year, mon)
+
+            let table = `
+                <table>
+                    <tr>
+                        <th class="th_cus">Пн</th>
+                        <th class="th_cus">Вт</th>
+                        <th class="th_cus">Ср</th>
+                        <th class="th_cus">Чт</th>
+                        <th class="th_cus">Пт</th>
+                        <th class="th_cus">Сб</th>
+                        <th class="th_cus">Вс</th>
+                    </tr>
+                    <tr>
+                `;
+
+            for (let i = 0; i < getDay(d); i++) {
+                table += "<td class='td_cus'></td>"
+            }
+
+            while (d.getMonth() == mon) {
+                table += "<td class='td_cus'>" + d.getDate() + "</td>"
+                if (getDay(d) % 7 == 6) {
+                    table += "</tr><tr>"
+                }
+                d.setDate(d.getDate() + 1)
+            }
+
+            if (getDay(d) != 0) {
+                for (let i = getDay(d); i < 7; i++) {
+                    table += "<td class='td_cus'></td>"
+                }
+            }
+
+            table += "</tr></table>"
+            elem.innerHTML = table
+        }
+
+        function getDay(date) {
+            let day = date.getDay();
+            if (day == 0) day = 7;
+            return day - 1;
+        }
+
+        createCalendar("#calendar", 2024, 1)
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 

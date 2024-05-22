@@ -1,0 +1,33 @@
+table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+caption {
+    padding: 10px 0;
+    background-color: #fff6ce;
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+.td_cus,
+.th_cus {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.td_cus {
+    color: white;
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    font-size: 24px;
+}
+
+th {
+    font-weight: bold;
+    background-color: #fff6ce;
+}
