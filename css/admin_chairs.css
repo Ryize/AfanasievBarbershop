@@ -60,3 +60,11 @@
     height: auto;
     border-radius: 15px;
 }
+
+input[disabled] {
+    /* Восстанавливаем стандартные стили */
+    opacity: 1;
+    cursor: auto;
+    background-color: white;
+    color: initial;
+}
