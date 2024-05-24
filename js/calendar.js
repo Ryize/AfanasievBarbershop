@@ -13,6 +13,7 @@ var Cal = function (divId) {
     ];
     // Месяцы начиная с января
     this.Months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.MonthsAbr = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
     //Устанавливаем текущий месяц, год
     var d = new Date();
     this.currMonth = d.getMonth();
@@ -88,17 +89,17 @@ Cal.prototype.showMonth = function (y, m) {
         var chkM = chk.getMonth();
         if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
             if (dow == 0 || dow == 6) {
-                html += '<td class="today weekend">' + i + '</td>';
+                html += '<td class="today weekend"><a href="admin_chairs.html">' + i + '</a></td>';
             }
             else {
-                html += '<td class="today">' + i + '</td>';
+                html += '<td class="today"><a href="admin_chairs.html">' + i + '</a></td>';
             }
         } else {
             if (dow == 0 || dow == 6) {
-                html += '<td class="normal weekend">' + i + '</td>';
+                html += '<td class="normal weekend"><a href="admin_chairs.html">' + i + '</a></td>';
             }
             else {
-                html += '<td class="normal">' + i + '</td>';
+                html += '<td class="normal"><a href="admin_chairs.html">' + i + '</a></td>';
             }
         }
         // закрыть строку в воскресенье

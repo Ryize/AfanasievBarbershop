@@ -68,6 +68,21 @@ td.today {
     color: #922929;
 }
 
+td a {
+    color: inherit;
+    /* Цвет текста как у родителя */
+    text-decoration: none;
+    /* Убираем подчеркивание */
+    background: none;
+    /* Убираем фон */
+    padding: 0;
+    /* Убираем отступы */
+    margin: 0;
+    /* Убираем поля */
+    border: none;
+    /* Убираем границу */
+}
+
 #btnPrev {
     float: left;
     margin-bottom: 20px;
