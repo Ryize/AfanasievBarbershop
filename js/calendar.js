@@ -30,6 +30,7 @@ Cal.prototype.nextMonth = function () {
         this.currMonth = this.currMonth + 1;
     }
     this.showcurr();
+    this.showAbrMonth();
 };
 // Переход к предыдущему месяцу
 Cal.prototype.previousMonth = function () {
@@ -41,11 +42,38 @@ Cal.prototype.previousMonth = function () {
         this.currMonth = this.currMonth - 1;
     }
     this.showcurr();
+    this.showAbrMonth();
 };
 // Показать текущий месяц
 Cal.prototype.showcurr = function () {
     this.showMonth(this.currYear, this.currMonth);
 };
+
+Cal.prototype.showAbrMonth = function () {
+
+    let arrow_l = '<i class="bi bi-arrow-left-square-fill arrow_l"></i>'
+    let arrow_r = '<i class="bi bi-arrow-right-square-fill arrow_r"></i>'
+
+    let prev_btn = arrow_l;
+    let next_btn = '';
+
+    if (this.currMonth == 11) {
+        prev_btn += this.MonthsAbr[this.currMonth - 1];
+        next_btn += this.MonthsAbr[0] + arrow_r;
+    }
+    else if (this.currMonth == 0) {
+        prev_btn += this.MonthsAbr[11];
+        next_btn += this.MonthsAbr[this.currMonth + 1] + arrow_r;
+    }
+    else {
+        prev_btn += this.MonthsAbr[this.currMonth - 1];
+        next_btn += this.MonthsAbr[this.currMonth + 1] + arrow_r;
+    }
+
+    document.getElementById('btnPrev').innerHTML = prev_btn
+    document.getElementById('btnNext').innerHTML = next_btn
+};
+
 // Показать месяц (год, месяц)
 Cal.prototype.showMonth = function (y, m) {
     var d = new Date()
@@ -126,6 +154,7 @@ window.onload = function () {
     // Начать календарь
     var c = new Cal("divCal");
     c.showcurr();
+    c.showAbrMonth();
     // Привязываем кнопки «Следующий» и «Предыдущий»
     getId('btnNext').onclick = function () {
         c.nextMonth();

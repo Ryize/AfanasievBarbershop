@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 .calendar-wrapper {
     margin: 3em auto;
     padding: 2em;
@@ -48,6 +50,12 @@ thead td {
     text-shadow: 2px 2px 1px #AA6009;
 }
 
+@media (max-width: 576px) {
+    .week_days {
+        text-shadow: 1px 2px 1px #AA6009;
+    }
+}
+
 td.not-current {
     opacity: 10%;
 }
@@ -88,21 +96,9 @@ td a {
     margin-bottom: 20px;
 }
 
-#btnPrev:before {
-    content: '\f104';
-    font-family: FontAwesome;
-    padding-right: 4px;
-}
-
 #btnNext {
     float: right;
     margin-bottom: 20px;
-}
-
-#btnNext:after {
-    content: '\f105';
-    font-family: FontAwesome;
-    padding-left: 4px;
 }
 
 #btnPrev,
@@ -110,7 +106,7 @@ td a {
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1em;
+    font-size: 20px;
     color: #c0c0c0;
     cursor: pointer;
     font-family: sans-serif;
@@ -118,8 +114,26 @@ td a {
     transition: all 0.3s ease;
 }
 
+@media (max-width: 576px) {
+
+    #btnPrev,
+    #btnNext {
+        font-size: 16px;
+    }
+}
+
 #btnPrev:hover,
 #btnNext:hover {
-    color: #28283b;
-    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #AA6009;
+}
+
+.arrow_l {
+    color: #AA6009;
+    margin-right: 10px;
+}
+
+.arrow_r {
+    color: #AA6009;
+    margin-left: 10px;
 }
