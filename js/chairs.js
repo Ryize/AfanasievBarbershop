@@ -1,58 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/base_style.css">
-    <link rel="stylesheet" href="css/admin_chairs.css">
-    <link rel="stylesheet" href="css/admin_selected_master.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Admin_chairs</title>
-</head>
-
-<body class="d-flex flex-column min-vh-100 bg-grey">
-    <header>
-        <nav class="navbar navbar-expand-lg bg-black">
-            <div class="container-fluid">
-                <button class="navbar-toggler ms-auto text-white" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Переключатель навигации">
-                    <span class="bi bi-list" </span>
-                </button>
-                <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item p-4">
-                            <a class="cus-btn" href="#" role="button">Календарь <i
-                                    class="bi bi-calendar2-date px-1"></i></a>
-                        </li>
-                        <li class="nav-item p-4">
-                            <a class="cus-btn" href="#" role="button">Мастера<i class="bi bi-scissors px-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <select class="cus-filial" aria-label="Default select example">
-                                <option selected disabled>Филиал</option>
-                                <option value="1">ул. Голубинская, 8</option>
-                                <option value="2">наб. 62-й Армии, 6</option>
-                            </select>
-                        </li>
-                    </ul>
-                    <div class="nav-item p-4">
-                        <a class="log-btn" href="#" role="button">Вход <i class="bi bi-person-circle px-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center text-white my-5">24 апреля 2024</h1>
-                </div>
-            </div>
-            <div class="row row-chair" id="chair">
-                <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">
+function addChair() {
+    let chair = `
+    <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">
                     <div class="name_chair">
                         <h3>Кресло №1</h3>
                     </div>
@@ -126,30 +74,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5"
-                    id="fixed_add_chair">
-                    <div class="name_chair">
-                        <h3>Добавить кресло</h3>
-                    </div>
-                    <div class="card_body">
-                        <div class="card_container flex-grow-1 d-flex justify-content-center align-items-center">
-                            <div class="row d-flex align-items-center text-center">
-                                <div class="col col-12">
-                                    <button type="button" style="border: none; background: none; padding: 0;"
-                                        id="addChair">
-                                        <img class="img_add_chair" src="img/chair-transformed.webp"
-                                            alt="Добавить кресло">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script src="js/chairs.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-</body>
+    `
 
-</html>
+    let fixed_add_chair = document.getElementById("fixed_add_chair");
+    fixed_add_chair.insertAdjacentHTML('beforebegin', chair);
+}
+
+
+
+window.onload = function () {
+    getId('addChair').onclick = function () {
+        addChair();
+    };
+}
+// Получить элемент по id
+function getId(id) {
+    return document.getElementById(id);
+}
