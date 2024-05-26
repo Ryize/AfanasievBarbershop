@@ -7,6 +7,7 @@ from authentication.models import CustomUser
 class WorkSchedule(models.Model):
     master = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    chair = models.IntegerField()
     date = models.DateField()
     shift_morning = models.BooleanField(default=False)
     shift_evening = models.BooleanField(default=False)
