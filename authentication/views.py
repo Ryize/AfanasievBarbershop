@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 
 def index(request):
-    return render(request, 'authentication/index.html')
+    return render(request, 'authentication/login.html')
 
 
 def login_view(request):

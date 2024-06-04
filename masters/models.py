@@ -4,13 +4,21 @@ from admins.models import Branch
 from authentication.models import CustomUser
 
 
-class WorkSchedule(models.Model):
-    master = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+class BranchUser(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    chair = models.IntegerField()
-    date = models.DateField()
-    shift_morning = models.BooleanField(default=False)
-    shift_evening = models.BooleanField(default=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.master.username} - {self.date} - Morning: {self.shift_morning}, Evening: {self.shift_evening}'
+        return f"{self.user} - {self.branch}"
+
+
+class Timetable(models.Model):
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    chair_number = models.PositiveIntegerField(default=1)
+    date = models.DateField()
+    shift_mon = models.BooleanField(default=False)
+    shift_eve = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user} - {self.branch} - {self.date}"
