@@ -2,6 +2,7 @@ from django.urls import path
 
 from admins.views import all_masters, left_panel
 
+app_name = 'admins'
 
 urlpatterns = [
     path('all_masters/', all_masters, name='all_masters'),

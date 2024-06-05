@@ -1,126 +1,26 @@
+{% extends 'base_masters.html' %}
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin_calendar.css' %}">
+{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/admin_base_with_left_panel.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <title>{{ title }}</title>
-</head>
-
-<body class="d-flex flex-column min-vh-100 bg-grey">
-    <header>
-        <nav class="navbar navbar-expand-lg bg-black">
-            <div class="container-fluid">
-                <button class="navbar-toggler ms-auto text-white" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Переключатель навигации">
-                    <span class="bi bi-list"> </span>
-                </button>
-                <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item p-4">
-                            <a class="cus-btn" href="admin_chairs.html" role="button">Календарь <i
-                                    class="bi bi-calendar2-date px-1"></i></a>
-                        </li>
-                        <li class="nav-item p-4">
-                            <a class="cus-btn" href="admin_all_masters.html" role="button">Мастера<i
-                                    class="bi bi-scissors px-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <select class="cus-filial" aria-label="Default select example">
-                                <option selected disabled>Филиал</option>
-                                <option value="1">ул. Голубинская, 8</option>
-                                <option value="2">наб. 62-й Армии, 6</option>
-                            </select>
-                        </li>
-                    </ul>
-                    <div class="nav-item p-4">
-                        <a class="log-btn" href="#" role="button">Вход <i class="bi bi-person-circle px-1"></i></a>
+{% block content %}
+    <main class="d-flex flex-grow-1">
+        <div class="container d-flex flex-grow-1">
+            <div class="row d-flex flex-grow-1 justify-content-center align-content-center" id="calendar">
+                <div class="col">
+                    <div class="calendar-wrapper">
+                        <button id="btnPrev" type="button"></button>
+                        <button id="btnNext" type="button"></button>
+                        <div id="divCal"></div>
                     </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main class="flex-md-grow-1 d-flex">
-        <div class="container-fluid flex-grow-1 d-flex">
-            <div class="row flex-grow-1 w-100">
-                <div class="col-12 col-lg-3 bg-dark_grey d-row-flex shadow_r px-xxl-5 px-5 px-lg-2">
-                    <div class="container">
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                <div class="text-field">
-                                    <label class="text-field__label" for="monthly_hours">Количество часов отработанных
-                                        в
-                                        августе</label>
-                                    <input class="text-field__input" type="text" name="monthly_hours" id=""
-                                        placeholder="160" value="" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="text-field">
-                                    <label class="text-field__label" for="scheduled_hours">Запланированное количество
-                                        часов в августе</label>
-                                    <input class="text-field__input" type="text" name="scheduled_hours" id=""
-                                        placeholder="180" value="" disabled>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row mt-5">
-                            <form class="col-12 d-flex" id="vacation">
-                                <div class="text-field flex-grow-1">
-                                    <label class="text-field__label" for="start_vacation_id">Отпуск</label>
-                                    <input class="text-field__date mb-2" type="date" name="start_vacation"
-                                        id="start_vacation_id" placeholder="" value="">
-                                    <input class="text-field__date" type="date" name="end_vacation" id="end_vacation"
-                                        placeholder="" value="">
-                                </div>
-                                <div class="btn__add">
-                                    <button class="btn_add_self green" type="submit"><i
-                                            class="bi bi-plus-circle-fill"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="row mt-5">
-                            <form class="col-12 d-flex" id="seak_leave">
-                                <div class="text-field flex-grow-1">
-                                    <label class="text-field__label" for="start_seak_leave_id">Больничный</label>
-                                    <input class="text-field__date mb-2" type="date" id="start_seak_leave_id"
-                                        name="start_seak_leave" placeholder="" value="">
-                                    <input class="text-field__date" type="date" id="end_seak_leave"
-                                        name="end_seak_leave" placeholder="" value="">
-                                </div>
-                                <div class="btn__add">
-                                    <button class="btn_add_self green" type="submit"><i
-                                            class="bi bi-plus-circle-fill"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center btn_padding">
-                                <button class="btn_del_master" type="button">Удалить мастера</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-9 bg-grey">
-                    мва
                 </div>
             </div>
         </div>
     </main>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-</body>
+{% endblock %}
 
-</html>
+{% block js %}
+    <script src="{% static 'js/calendar.js' %}"></script>
+{% endblock %}

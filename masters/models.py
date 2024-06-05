@@ -4,14 +4,6 @@ from admins.models import Branch
 from authentication.models import CustomUser
 
 
-class BranchUser(models.Model):
-    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.user} - {self.branch}"
-
-
 class Timetable(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
