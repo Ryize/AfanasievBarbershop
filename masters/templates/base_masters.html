@@ -28,8 +28,9 @@
                         <li class="nav-item">
                             <select class="cus-filial" aria-label="Default select example">
                                 <option selected disabled>Филиал</option>
-                                <option value="1">ул. Голубинская, 8</option>
-                                <option value="2">наб. 62-й Армии, 6</option>
+                                {% for branch in branches %}
+                                    <option value="{{ branch.id }}">{{ branch.address }}</option>
+                                {% endfor %}
                             </select>
                         </li>
                     </ul>
