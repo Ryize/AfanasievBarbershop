@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item">
-                            <select class="cus-filial" aria-label="Default select example">
+                            <select class="cus-filial" aria-label="Default select example" id="branchSelect">
                                 <option selected disabled>Филиал</option>
                                 {% for branch in branches %}
                                     <option value="{{ branch.id }}">{{ branch.address }}</option>
@@ -70,7 +70,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-9 bg-grey">
-                    {% block content %}{% endblock %}
+                    {% block content %}
+{#                        Здесь календарь#}
+                    {% endblock %}
                 </div>
             </div>
         </div>
