@@ -27,10 +27,18 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item">
                             <select class="cus-filial" aria-label="Default select example" id="branchSelect">
-                                <option selected disabled>Филиал</option>
-                                {% for branch in branches %}
-                                    <option value="{{ branch.id }}">{{ branch.address }}</option>
-                                {% endfor %}
+                                {% if address %}
+                                    <option selected>{{ address }}</option>
+                                    {% for branch in branches %}
+                                        {% if branch.address != address %}
+                                            <option value="{{ branch.id }}">{{ branch.address }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for branch in branches %}
+                                        <option value="{{ branch.id }}">{{ branch.address }}</option>
+                                    {% endfor %}
+                                {% endif %}
                             </select>
                         </li>
                     </ul>
