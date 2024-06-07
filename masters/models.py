@@ -1,12 +1,12 @@
 from django.db import models
 
 from admins.models import Branch
-from authentication.models import CustomUser
+from users.models import User
 
 
 class Timetable(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     chair_number = models.PositiveIntegerField(default=1)
     date = models.DateField()
     shift_mon = models.BooleanField(default=False)

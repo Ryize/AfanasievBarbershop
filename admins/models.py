@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
-from authentication.models import CustomUser
+from users.models import User
 
 
 class Branch(models.Model):
@@ -15,7 +15,7 @@ class Branch(models.Model):
 
 class BranchUser(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user} - {self.branch}"
