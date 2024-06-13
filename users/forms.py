@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+
+from admins.models import Branch
 from users.models import User
 from django.forms import ModelForm, Form
 
@@ -29,6 +31,11 @@ class UserRegistrationForm(UserCreationForm):
         'class': 'form-control py-4', 'placeholder': 'Пароль'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4', 'placeholder': 'Повторите пароль'}))
+    branches = forms.ModelMultipleChoiceField(
+        queryset=Branch.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label='Выберите филиалы'
+    )
 
     class Meta:
         model = User

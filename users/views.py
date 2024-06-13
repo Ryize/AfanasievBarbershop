@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
 from django.urls import reverse
+
+from admins.models import BranchUser
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
@@ -30,7 +32,10 @@ def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            branches = form.cleaned_data['branches']
+            for branch in branches:
+                BranchUser.objects.create(user=user, branch=branch)
             return HttpResponseRedirect(reverse('users:login'))
     else:
         form = UserRegistrationForm()

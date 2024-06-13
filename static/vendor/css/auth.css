@@ -44,10 +44,6 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.bg-grey{
-    background: var(--gray);
-}
-
 *,
 *::before,
 *::after {
@@ -10597,7 +10593,7 @@ a.text-dark:hover, a.text-dark:focus {
 html,
 body {
     height: 100%;
-    background: var(--gray);
+    background: #474A51;
 }
 
 .container,
@@ -10613,6 +10609,7 @@ body {
 #layoutAuthentication {
     display: flex;
     flex-direction: column;
+    height: 100%;
     min-height: 100vh;
 }
 
@@ -10903,4 +10900,13 @@ body {
     border: none;
     box-shadow: 0 0 0 4px var(--orange);
     color: #fff;
+}
+
+.bg-grey{
+    background: var(--gray);
+}
+
+body{
+    min-height: 100vh;
+    height: 100%;
 }
