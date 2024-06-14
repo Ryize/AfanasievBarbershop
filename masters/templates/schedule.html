@@ -11,20 +11,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center text-white my-5">{{ date }}</h1>
+                    <h1 class="text-center text-white my-5">{{ format_date }}</h1>
                 </div>
             </div>
-            <div class="row row-chair" id="chair">
+            <div class="row row-chair" id="chair" data-date="{{ date }}">
                 {% for chair in chairs|range_filter %}
                     <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">
                         <div class="name_chair">
                             <h3>Кресло {{ chair }}</h3>
                         </div>
-                        <div class="card_body">
+                        <div class="card_body" data-chair-number="{{ chair }}">
                             <div class="card_container flex-grow-1 d-flex justify-content-center align-items-center">
                                 <div class="row card_chair" id="chair">
                                     <div class="col col-8 d-flex justify-content-center align-items-center">
                                         <form action="#" method="post" id="work_time">
+                                            {% csrf_token %}
                                             <div>
                                                 <input class="input_style" type="text" id="start_time" name="start_time"
                                                     value="09:00" disabled>
@@ -33,16 +34,11 @@
                                                 <input class="input_style" type="text" id="end_time" name="end_time"
                                                     value="15:00" disabled>
                                             </div>
-                                            <div><input class="input_style" type="text" id="name" name="name"></div>
                                             <div>
-                                                <select class="input_style" name="surname_master" id="surname_master">
-                                                    <option value="surname_0">Выберите мастера</option>
-                                                    <option value="surname_1">Кудрявцева</option>
-                                                    <option value="surname_2">Агафьев</option>
-                                                    <option value="surname_3">Поддубный</option>
-                                                    <option value="surname_4">Мантуров</option>
-                                                    <option value="surname_6">Константинопольский</option>
-                                                </select>
+                                                <input class="input_style" type="text" id="name" name="first_name">
+                                            </div>
+                                            <div>
+                                                <input class="input_style" type="text" id="name" name="last_name">
                                             </div>
                                         </form>
                                     </div>
@@ -51,8 +47,8 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button form="work_time" class="but_add_work_time"><i
-                                            class="bi bi-person-fill-add"></i></button>
+                                    <button class="but_add_work_time"><i
+                                            class="bi bi-person-fill-add" data-shift-type="mon"></i></button>
                                 </div>
                             </div>
                             <div class="card_container flex-grow-1 d-flex justify-content-center align-items-center">
@@ -67,16 +63,11 @@
                                                 <input class="input_style" type="text" id="end_time" name="end_time"
                                                     value="20:00" disabled>
                                             </div>
-                                            <div><input class="input_style" type="text" id="name" name="name"></div>
                                             <div>
-                                                <select class="input_style" name="surname_master" id="surname_master">
-                                                    <option value="surname_0">Выберите мастера</option>
-                                                    <option value="surname_1">Кудрявцева</option>
-                                                    <option value="surname_2">Агафьев</option>
-                                                    <option value="surname_3">Поддубный</option>
-                                                    <option value="surname_4">Мантуров</option>
-                                                    <option value="surname_6">Константинопольский</option>
-                                                </select>
+                                                <input class="input_style" type="text" id="first_name" name="first_name">
+                                            </div>
+                                            <div>
+                                                <input class="input_style" type="text" id="last_name" name="last_name">
                                             </div>
                                         </form>
                                     </div>
@@ -85,7 +76,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <button class="but_add_work_time"><i class="bi bi-person-fill-add"></i></button>
+                                    <button class="but_add_work_time" data-shift-type="eve">
+                                        <i class="bi bi-person-fill-add"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
