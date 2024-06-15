@@ -25,4 +25,6 @@ class PhoneNumberField(models.CharField):
 class User(AbstractUser):
     username = PhoneNumberField(unique=True)
     image = models.ImageField(upload_to='user_images', default='default.jpg')
+    first_name = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
 
