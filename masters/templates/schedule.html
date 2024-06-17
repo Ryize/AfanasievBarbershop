@@ -25,7 +25,12 @@
                                 {% if chair.t_mon_dict %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
-                                            <form action="#" method="post" id="work_time">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_mon_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="del">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                                <input type="hidden" name="shift_mon" value="Yes">
+                                                <input type="hidden" name="shift_eve" value="No">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
                                                         value="09:00" disabled>
@@ -49,13 +54,18 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <button class="but_add_work_time"><i
-                                                class="bi bi-person-fill-add" data-shift-type="mon"></i></button>
+                                        <button class="but_del_work_mon" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add" ></i></button>
                                     </div>
                                 {% else %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
-                                            <form action="#" method="post" id="work_time">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_mon_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="hidden" name="shift_mon" value="Yes">
+                                                <input type="hidden" name="shift_eve" value="No">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
                                                         value="09:00" disabled>
@@ -79,8 +89,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <button class="but_add_work_time"><i
-                                                class="bi bi-person-fill-add" data-shift-type="mon"></i></button>
+                                        <button class="but_add_work_mon" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add" ></i></button>
                                     </div>
                                 {% endif %}
                             </div>
@@ -88,7 +98,12 @@
                                 {% if chair.t_eve_dict %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
-                                            <form action="#" method="post" id="work_time">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="del">
+                                                <input type="hidden" name="shift_mon" value="No">
+                                                <input type="hidden" name="shift_eve" value="Yes">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
                                                         value="15:00" disabled>
@@ -112,27 +127,28 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <button class="but_add_work_time"><i
-                                                class="bi bi-person-fill-add" data-shift-type="eve"></i></button>
+                                        <button class="but_del_work_eve" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add"></i></button>
                                     </div>
                                 {% else %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
-                                            <form action="#" method="post" id="work_time">
+                                           <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
+                                               {% csrf_token %}
+                                               <input type="hidden" name="action" value="add">
+                                               <input type="hidden" name="shift_mon" value="No">
+                                               <input type="hidden" name="shift_eve" value="Yes">
+                                               <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                               <div>
+                                                   <input class="input_style" type="text" id="start_time" name="start_time" value="15:00" disabled>
+                                               </div>
+                                               <div>
+                                                   <input class="input_style" type="text" id="end_time" name="end_time" value="20:00" disabled>
+                                               </div>
                                                 <div>
-                                                    <input class="input_style" type="text" id="start_time" name="start_time"
-                                                        value="15:00" disabled>
+                                                    <input class="input_style" type="text" id="first_name" name="first_name" value="Место не занято" disabled>
                                                 </div>
-                                                <div>
-                                                    <input class="input_style" type="text" id="end_time" name="end_time"
-                                                        value="20:00" disabled>
-                                                </div>
-                                                <div>
-                                                    <input class="input_style" type="text" id="first_name" name="first_name"
-                                                           value="Место не занято" disabled>
-                                                </div>
-                                                <div>
-                                                    <input class="input_style" type="text" id="last_name" name="last_name"
+                                                <div><input class="input_style" type="text" id="last_name" name="last_name"
                                                      value="Место не занято" disabled>
                                                 </div>
                                             </form>
@@ -142,8 +158,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <button class="but_add_work_time" onclick="click_clack()"><i
-                                                class="bi bi-person-fill-add" data-shift-type="eve"></i></button>
+                                        <button class="but_add_work_eve" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add"></i></button>
                                     </div>
                                 {% endif %}
                             </div>

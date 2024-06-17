@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_base_with_left_panel.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {% block css %}{% endblock %}
     <title>{{ title }}</title>
 </head>
@@ -89,34 +87,45 @@
     </main>
     {% block js %}
         <script>
-        function click_clack(){
-                    let chairNumber = $(this).closest('.card_body').data('chair-number');
-                    let shiftType = $(this).data('shift-type');
-                    let date = $(this).closest('.row_chair').data('date');
-                    let branchSelect = document.getElementById('branchSelect');
-                    let selectedBranch = branchSelect.value;
-
-                    $.ajax({
-                        url: "{% url 'masters:update_timetable' %}",
-                        type: "POST",
-                        data: {
-                            'chair_number': chairNumber,
-                            'shift_type': shiftType,
-                            'date': date,
-                            'branch_id': selectedBranch,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}'
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                alert('Timetable updated successfully!');
-                            } else {
-                                alert('Failed to update timetable.');
-                            }
-                        }
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const button_add_mon = document.querySelectorAll('.but_add_work_mon');
+                const button_add_eve = document.querySelectorAll('.but_add_work_eve');
+                const button_del_mon = document.querySelectorAll('.but_del_work_mon');
+                const button_del_eve = document.querySelectorAll('.but_del_work_eve');
+            
+                button_add_mon.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const chairNum = button.getAttribute('data-chair-num');
+                        const form = document.getElementById(`work_mon_${chairNum}`);
+                        form.submit();
                     });
-                    }
-        </script>
-         <script src="{% static 'js/filial.js' %}"></script>
+                });
+                
+                button_add_eve.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const chairNum = button.getAttribute('data-chair-num');
+                        const form = document.getElementById(`work_eve_${chairNum}`);
+                        form.submit();
+                    });
+                });
+                button_del_mon.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const chairNum = button.getAttribute('data-chair-num');
+                        const form = document.getElementById(`work_mon_${chairNum}`);
+                        form.submit();
+                    });
+                });
+                
+                button_del_eve.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const chairNum = button.getAttribute('data-chair-num');
+                        const form = document.getElementById(`work_eve_${chairNum}`);
+                        form.submit();
+                    });
+                });
+            });
+        </script>   
+        <script src="{% static 'js/filial.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
 

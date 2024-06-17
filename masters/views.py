@@ -16,10 +16,33 @@ def index(request):
 
 
 def schedule(request, branch_id, date):
-    timetables_list = []
-    quantity_chairs = Branch.objects.get(id=branch_id).chairs
-    data_timetables = Timetable.objects.filter(branch=branch_id, date=date).all()
+    if request.method == 'POST':
+        action = request.POST['action']
+        chair_num = request.POST.get('chair_num')
+        shift_mon = request.POST.get('shift_mon')
+        shift_eve = request.POST.get('shift_eve')
 
+        print(chair_num, shift_mon, shift_eve, action, request.user.last_name, branch_id, date)
+
+    quantity_chairs = Branch.objects.get(id=branch_id).chairs
+    context = {
+        'title': 'Расписание',
+        'branches': Branch.objects.all(),
+        'chairs': quantity_chairs,
+        'address': Branch.objects.get(id=branch_id).address,
+        'branch_id': Branch.objects.get(id=branch_id).id,
+        'date': date,
+        'format_date': format_date(date),
+        'timetables_data': get_timetables_data(branch_id, date),
+    }
+
+    return render(request, 'schedule.html', context)
+
+
+def get_timetables_data(branch_id, date):
+    timetables_list = []
+    data_timetables = Timetable.objects.filter(branch=branch_id, date=date).all()
+    quantity_chairs = Branch.objects.get(id=branch_id).chairs
     for chair in range(1, quantity_chairs + 1):
         timetables = {}
         timetable_mon = data_timetables.filter(chair_number=chair, shift_mon=True).first()
@@ -37,48 +60,7 @@ def schedule(request, branch_id, date):
                                         'last_name': timetable_mon.user.last_name,
                                         'image': timetable_mon.user.image}
         timetables_list.append(timetables)
-    print(timetables_list)
-
-    context = {
-        'title': 'Расписание',
-        'branches': Branch.objects.all(),
-        'chairs': quantity_chairs,
-        'address': Branch.objects.get(id=branch_id).address,
-        'date': date,
-        'format_date': format_date(date),
-        'timetables_data': timetables_list,
-    }
-
-    return render(request, 'schedule.html', context)
-
-
-@login_required
-def update_timetable(request):
-    if request.method == 'POST':
-        branch_id = request.POST.get('branch_id')
-        chair_number = request.POST.get('chair_number')
-        date = request.POST.get('date')
-        shift_type = request.POST.get('shift_type')
-        print(branch_id)
-        branch = Branch.objects.get(id=branch_id)
-        user = request.user
-
-        timetable = Timetable.objects.create(
-            branch=branch,
-            user=user,
-            chair_number=chair_number,
-            date=date
-        )
-
-        if shift_type == 'mon':
-            timetable.shift_mon = True
-        elif shift_type == 'eve':
-            timetable.shift_eve = True
-
-        timetable.save()
-
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+    return timetables_list
 
 
 def format_date(date):
