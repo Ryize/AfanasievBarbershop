@@ -35,6 +35,19 @@ def schedule(request, branch_id, date):
                     user=request.user,
                     chair_num=chair_num,
                     date=date)
+        elif action == 'del':
+            if shift_mon == 'Yes' and shift_eve == 'No':
+                delete_timetable_mon(
+                    branch=int(branch_id),
+                    user=request.user,
+                    chair_num=chair_num,
+                    date=date)
+            elif shift_mon == 'No' and shift_eve == 'Yes':
+                delete_timetable_eve(
+                    branch=int(branch_id),
+                    user=request.user,
+                    chair_num=chair_num,
+                    date=date)
 
         print(chair_num, shift_mon, shift_eve, action, request.user.id, branch_id, date)
 
@@ -118,3 +131,42 @@ def add_or_update_timetable_shift_eve(branch, user, chair_num, date):
         if not created:
             timetable.shift_eve = True
             timetable.save()
+
+def delete_timetable_mon(branch, user, chair_num, date):
+    branch = Branch.objects.get(id=branch)
+    with transaction.atomic():
+        try:
+            timetable = Timetable.objects.get(
+                branch=branch,
+                user=user,
+                chair_number=chair_num,
+                date=date
+            )
+            if timetable.shift_mon and timetable.shift_eve:
+                timetable.shift_mon = False
+                timetable.save()
+            else:
+                timetable.delete()
+            print("Запись успешно удалена.")
+        except Timetable.DoesNotExist:
+            print("Запись не найдена.")
+
+
+def delete_timetable_eve(branch, user, chair_num, date):
+    branch = Branch.objects.get(id=branch)
+    with transaction.atomic():
+        try:
+            timetable = Timetable.objects.get(
+                branch=branch,
+                user=user,
+                chair_number=chair_num,
+                date=date
+            )
+            if timetable.shift_mon and timetable.shift_eve:
+                timetable.shift_eve = False
+                timetable.save()
+            else:
+                timetable.delete()
+            print("Запись успешно удалена.")
+        except Timetable.DoesNotExist:
+            print("Запись не найдена.")
