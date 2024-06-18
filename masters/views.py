@@ -3,6 +3,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.db import transaction
 
 from .models import Timetable, Branch
 
@@ -21,8 +22,21 @@ def schedule(request, branch_id, date):
         chair_num = request.POST.get('chair_num')
         shift_mon = request.POST.get('shift_mon')
         shift_eve = request.POST.get('shift_eve')
+        if action == 'add':
+            if shift_mon == 'Yes' and shift_eve == 'No':
+                add_or_update_timetable_shift_mon(
+                    branch=int(branch_id),
+                    user=request.user,
+                    chair_num=chair_num,
+                    date=date)
+            elif shift_mon == 'No' and shift_eve == 'Yes':
+                add_or_update_timetable_shift_eve(
+                    branch=int(branch_id),
+                    user=request.user,
+                    chair_num=chair_num,
+                    date=date)
 
-        print(chair_num, shift_mon, shift_eve, action, request.user.last_name, branch_id, date)
+        print(chair_num, shift_mon, shift_eve, action, request.user.id, branch_id, date)
 
     quantity_chairs = Branch.objects.get(id=branch_id).chairs
     context = {
@@ -56,9 +70,9 @@ def get_timetables_data(branch_id, date):
                                         'last_name': timetable_mon.user.last_name,
                                         'image': timetable_mon.user.image}
         if timetable_eve:
-            timetables['t_eve_dict'] = {'first_name': timetable_mon.user.first_name,
-                                        'last_name': timetable_mon.user.last_name,
-                                        'image': timetable_mon.user.image}
+            timetables['t_eve_dict'] = {'first_name': timetable_eve.user.first_name,
+                                        'last_name': timetable_eve.user.last_name,
+                                        'image': timetable_eve.user.image}
         timetables_list.append(timetables)
     return timetables_list
 
@@ -74,3 +88,33 @@ def format_date(date):
     formatted_date = f"{date.day} {months[date.month - 1]} {date.year}"
 
     return formatted_date
+
+
+def add_or_update_timetable_shift_mon(branch, user, chair_num, date):
+    with transaction.atomic():
+        branch = Branch.objects.get(id=branch)
+        timetable, created = Timetable.objects.get_or_create(
+            branch=branch,
+            user=user,
+            chair_number=chair_num,
+            date=date,
+            defaults={'shift_mon': True, 'shift_eve': False}
+        )
+        if not created:
+            timetable.shift_mon = True
+            timetable.save()
+
+
+def add_or_update_timetable_shift_eve(branch, user, chair_num, date):
+    branch = Branch.objects.get(id=branch)
+    with transaction.atomic():
+        timetable, created = Timetable.objects.get_or_create(
+            branch=branch,
+            user=user,
+            chair_number=chair_num,
+            date=date,
+            defaults={'shift_mon': False, 'shift_eve': True}
+        )
+        if not created:
+            timetable.shift_eve = True
+            timetable.save()
