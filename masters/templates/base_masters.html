@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_base_with_left_panel.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     {% block css %}{% endblock %}
     <title>{{ title }}</title>
 </head>
@@ -57,8 +57,8 @@
                         <div class="row mt-5">
                             <div class="col-12">
                                 <div class="text-field">
-                                    <label class="text-field__label" for="monthly_hours">Колличество отработанных часов</label>
-                                    <input class="text-field__input" type="text" name="monthly_hours" id=""
+                                    <label class="text-field__label" for="hours_worked_in_month">Колличество отработанных часов</label>
+                                    <input class="text-field__input" type="text" name="hours_worked_in_month" id=""
                                         placeholder="{{ hours_worked_in_month }}" value="" disabled>
                                 </div>
                             </div>
@@ -66,13 +66,32 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <div class="text-field">
-                                    <label class="text-field__label" for="scheduled_hours">Запланированное количество
+                                    <label class="text-field__label" for="total_hours_in_month">Запланированное количество
                                         часов в августе</label>
-                                    <input class="text-field__input" type="text" name="scheduled_hours" id=""
+                                    <input class="text-field__input" type="text" name="total_hours_in_month" id=""
                                         placeholder="{{ total_hours_in_month }}" value="" disabled>
                                 </div>
                             </div>
                         </div>
+                        {% if total_hours_in_month >= 40 %}
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="enough_hours d-flex">
+                                        <p><i class="hours_cal bi bi-calendar2-check-fill"></i></p>
+                                        <p class="align-self-center">У Вас максимальный коэффициент!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %} 
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="few_hours d-flex">
+                                        <p><i class="hours_cal bi bi-calendar-x-fill"></i></p>
+                                        <p>Для повышения коэффициента нужно запланировать больше часов!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-12 col-md-9 bg-grey">
