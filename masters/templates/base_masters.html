@@ -43,7 +43,7 @@
                         </li>
                     </ul>
                     <div class="nav-item p-4">
-                        <a class="log-btn" href="#" role="button">Вход <i class="bi bi-person-circle px-1"></i></a>
+                        <a class="log-btn" href="{% url 'users:logout' %}" role="button">Выход <i class="bi bi-person-circle px-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -57,11 +57,9 @@
                         <div class="row mt-5">
                             <div class="col-12">
                                 <div class="text-field">
-                                    <label class="text-field__label" for="monthly_hours">Количество часов отработанных
-                                        в
-                                        августе</label>
+                                    <label class="text-field__label" for="monthly_hours">Колличество отработанных часов</label>
                                     <input class="text-field__input" type="text" name="monthly_hours" id=""
-                                        placeholder="160" value="" disabled>
+                                        placeholder="{{ hours_worked_in_month }}" value="" disabled>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +69,7 @@
                                     <label class="text-field__label" for="scheduled_hours">Запланированное количество
                                         часов в августе</label>
                                     <input class="text-field__input" type="text" name="scheduled_hours" id=""
-                                        placeholder="180" value="" disabled>
+                                        placeholder="{{ total_hours_in_month }}" value="" disabled>
                                 </div>
                             </div>
                         </div>

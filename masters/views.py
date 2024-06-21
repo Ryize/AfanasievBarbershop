@@ -1,7 +1,10 @@
-from datetime import datetime
+import calendar
+from datetime import datetime, timedelta
 
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.db import transaction
+from django.utils.timezone import now
 
 from .models import Timetable, Branch
 
@@ -10,6 +13,8 @@ def index(request):
     context = {
         'title': 'masters',
         'branches': Branch.objects.all(),
+        'total_hours_in_month': total_hours_in_month(request.user),
+        'hours_worked_in_month': hours_worked_in_month(request.user)
     }
     return render(request, 'index.html', context)
 
@@ -59,6 +64,8 @@ def schedule(request, branch_id, date):
         'date': date,
         'format_date': format_date(date),
         'timetables_data': get_timetables_data(branch_id, date),
+        'total_hours_in_month': total_hours_in_month(request.user),
+        'hours_worked_in_month': hours_worked_in_month(request.user)
     }
 
     return render(request, 'schedule.html', context)
@@ -75,7 +82,6 @@ def get_timetables_data(branch_id, date):
         timetables['num'] = chair
         timetables['t_mon_dict'] = ''
         timetables['t_eve_dict'] = ''
-        # print(timetable_mon.user.first_name)
         if timetable_mon:
             timetables['t_mon_dict'] = {'first_name': timetable_mon.user.first_name,
                                         'last_name': timetable_mon.user.last_name,
@@ -168,3 +174,43 @@ def delete_timetable_eve(branch, user, chair_num, date):
             print("Запись успешно удалена.")
         except Timetable.DoesNotExist:
             print("Запись не найдена.")
+
+
+def total_hours_in_month(user):
+    current_date = datetime.now()
+    total_hours_in_month = 0
+
+    first_day_of_month = current_date.replace(day=1)
+    last_day_of_month = (first_day_of_month + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+
+    timetable_records = Timetable.objects.filter(
+        Q(user=user) &
+        Q(date__gte=first_day_of_month) &
+        Q(date__lte=last_day_of_month)
+    )
+    for _ in timetable_records:
+        if _.shift_mon:
+            total_hours_in_month += 8
+        if _.shift_eve:
+            total_hours_in_month += 5
+    return total_hours_in_month
+
+
+def hours_worked_in_month(user):
+    current_date = datetime.now()
+    print(current_date)
+    hours_worked_in_month = 0
+
+    first_day_of_month = current_date.replace(day=1)
+
+    timetable_records = Timetable.objects.filter(
+        Q(user=user) &
+        Q(date__gte=first_day_of_month) &
+        Q(date__lte=current_date - timedelta(days=1))
+    )
+    for _ in timetable_records:
+        if _.shift_mon:
+            hours_worked_in_month += 8
+        if _.shift_eve:
+            hours_worked_in_month += 5
+    return hours_worked_in_month
