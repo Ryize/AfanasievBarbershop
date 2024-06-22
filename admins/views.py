@@ -7,4 +7,4 @@ def index(request):
         'title': 'admins',
         'branches': Branch.objects.filter(branchuser__user=request.user)
     }
-    return render(request, 'index.html', context)
+    return render(request, 'admins/index.html', context)
