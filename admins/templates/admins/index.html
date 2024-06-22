@@ -1,0 +1,26 @@
+{% extends 'base_admins.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin_calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="d-flex flex-grow-1">
+        <div class="container d-flex flex-grow-1">
+            <div class="row d-flex flex-grow-1 justify-content-center align-content-center" id="calendar">
+                <div class="col">
+                    <div class="calendar-wrapper">
+                        <button id="btnPrev" type="button"></button>
+                        <button id="btnNext" type="button"></button>
+                        <div id="divCal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/calendar.js' %}"></script>
+{% endblock %}

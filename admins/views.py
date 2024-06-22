@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from .models import Branch
 
 
-def all_masters(request):
-    return render(request, 'admins/admin_all_masters.html')
-
-
-def left_panel(request):
-    return render(request, 'admins/admin_base_with_left_panel.html')
+def index(request):
+    context = {
+        'title': 'admins',
+        'branches': Branch.objects.filter(branchuser__user=request.user)
+    }
+    return render(request, 'index.html', context)

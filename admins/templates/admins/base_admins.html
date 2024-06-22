@@ -1,0 +1,77 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_base_with_left_panel.css' %}">
+    {% block css %}{% endblock %}
+    <title>{{ title }}</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-grey">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-black">
+            <div class="container-fluid">
+                <button class="navbar-toggler ms-auto text-white" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Переключатель навигации">
+                    <span class="bi bi-list"> </span>
+                </button>
+                <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li class="nav-item p-4">
+                            <a class="cus-btn" href="{% url 'masters:index' %}" role="button">Календарь <i
+                                    class="bi bi-calendar2-date px-1"></i></a>
+                        </li>
+                        <li class="nav-item p-4">
+                            <a class="cus-btn" href="#" role="button">Мастера<i class="bi bi-scissors px-1"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <select class="cus-filial" aria-label="Default select example" id="branchSelect">
+                                {% if address %}
+                                    <option selected>{{ address }}</option>
+                                    {% for branch in branches %}
+                                        {% if branch.address != address %}
+                                            <option value="{{ branch.id }}">{{ branch.address }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for branch in branches %}
+                                        <option value="{{ branch.id }}">{{ branch.address }}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="nav-item p-4">
+                        <a class="log-btn" href="{% url 'users:logout' %}" role="button">Выход <i class="bi bi-person-circle px-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="flex-md-grow-1 d-flex">
+        <div class="container-fluid flex-grow-1 d-flex">
+            <div class="row flex-grow-1 w-100">
+                    {% block content %}
+{#                        Здесь календарь#}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+    {% block js %}
+        <script src="{% static 'js/filial.js' %}"></script>
+        <script src="{% static 'js/change_day.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% endblock %}
+
+</body>
+
+</html>
