@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.db import transaction
-from django.utils.timezone import now
 
 from .models import Timetable, Branch
 
@@ -12,7 +11,7 @@ from .models import Timetable, Branch
 def index(request):
     context = {
         'title': 'masters',
-        'branches': Branch.objects.all(),
+        'branches': Branch.objects.filter(branchuser__user=request.user),
         'total_hours_in_month': total_hours_in_month(request.user),
         'hours_worked_in_month': hours_worked_in_month(request.user)
     }
@@ -52,12 +51,10 @@ def schedule(request, branch_id, date):
                     chair_num=chair_num,
                     date=date)
 
-        print(chair_num, shift_mon, shift_eve, action, request.user.id, branch_id, date)
-
     quantity_chairs = Branch.objects.get(id=branch_id).chairs
     context = {
         'title': 'Расписание',
-        'branches': Branch.objects.all(),
+        'branches': Branch.objects.filter(branchuser__user=request.user),
         'chairs': quantity_chairs,
         'address': Branch.objects.get(id=branch_id).address,
         'branch_id': Branch.objects.get(id=branch_id).id,
@@ -85,11 +82,13 @@ def get_timetables_data(branch_id, date):
         if timetable_mon:
             timetables['t_mon_dict'] = {'first_name': timetable_mon.user.first_name,
                                         'last_name': timetable_mon.user.last_name,
-                                        'image': timetable_mon.user.image}
+                                        'image': timetable_mon.user.image,
+                                        'id': timetable_mon.user.id}
         if timetable_eve:
             timetables['t_eve_dict'] = {'first_name': timetable_eve.user.first_name,
                                         'last_name': timetable_eve.user.last_name,
-                                        'image': timetable_eve.user.image}
+                                        'image': timetable_eve.user.image,
+                                        'id': timetable_eve.user.id}
         timetables_list.append(timetables)
     return timetables_list
 

@@ -25,6 +25,10 @@
                 </button>
                 <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li class="nav-item p-4">
+                            <a class="cus-btn" href="{% url 'masters:index' %}" role="button">Календарь <i
+                                    class="bi bi-calendar2-date px-1"></i></a>
+                        </li>
                         <li class="nav-item">
                             <select class="cus-filial" aria-label="Default select example" id="branchSelect">
                                 {% if address %}
@@ -52,7 +56,7 @@
     <main class="flex-md-grow-1 d-flex">
         <div class="container-fluid flex-grow-1 d-flex">
             <div class="row flex-grow-1 w-100">
-                <div class="col-12 col-lg-3 bg-dark_grey d-row-flex shadow_r px-xxl-5 px-5 px-lg-2">
+                <div class="col-12 col-lg-3 bg-dark_grey d-row-flex shadow_r px-xxl-5 px-5 px-lg-2 order-lg-1 order-2">
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col-12">
@@ -82,7 +86,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {% else %} 
+                        {% else %}
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="few_hours d-flex">
@@ -94,7 +98,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col-12 col-md-9 bg-grey">
+                <div class="col-12 col-md-9 bg-grey order-lg-2 order-1">
                     {% block content %}
 {#                        Здесь календарь#}
                     {% endblock %}
@@ -143,6 +147,7 @@
             });
         </script>   
         <script src="{% static 'js/filial.js' %}"></script>
+        <script src="{% static 'js/change_day.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
 

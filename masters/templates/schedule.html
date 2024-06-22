@@ -14,6 +14,14 @@
                     <h1 class="text-center text-white my-5">{{ format_date }}</h1>
                 </div>
             </div>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <a class="day-btn m-2" href="#" role="button" id="previous_day"><i
+                                class="bi bi bi-arrow-left-circle-fill px-1"></i>Предыдущий</a>
+                    <a class="day-btn m-2" href="#" role="button" id="last_day">Следующий<i
+                                class="bi bi bi-arrow-right-circle-fill px-1"></i></a>
+                </div>
+            </div>
             <div class="row row-chair" id="chair" data-date="{{ date }}">
                 {% for chair in timetables_data %}
                     <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">
@@ -50,13 +58,20 @@
                                             </form>
                                         </div>
                                         <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
-                                            <img class="img_master" src="{{ chair.t_mon_dict.image }}" alt="Фото мастера">
+                                            <img class="img_master" src="{{ chair.t_mon_dict.image.url }}" alt="Фото мастера">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <button class="but_del_work_mon" data-chair-num="{{ chair.num }}"><i
-                                                class="bi bi-person-fill-dash"></i></button>
-                                    </div>
+                                    {% if request.user.id == chair.t_mon_dict.id  %}
+                                        <div class="row">
+                                            <button class="but_del_work_mon" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% else %}
+                                        <div class="row">
+                                            <button class="but_del_work_mon invisible" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% endif %}    
                                 {% else %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
@@ -123,13 +138,20 @@
                                             </form>
                                         </div>
                                         <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
-                                            <img class="img_master" src="{% static 'img/i (2).webp' %}" alt="Фото мастера">
+                                            <img class="img_master" src="{{ chair.t_eve_dict.image.url }}" alt="Фото мастера">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <button class="but_del_work_eve" data-chair-num="{{ chair.num }}"><i
-                                                class="bi bi-person-fill-dash"></i></button>
-                                    </div>
+                                    {% if request.user.id == chair.t_eve_dict.id  %}
+                                        <div class="row">
+                                            <button class="but_del_work_eve" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% else %}
+                                        <div class="row">
+                                            <button class="but_del_work_eve invisible" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% endif %} 
                                 {% else %}
                                     <div class="row card_chair" id="chair">
                                         <div class="col col-8 d-flex justify-content-center align-items-center">
