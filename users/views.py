@@ -15,6 +15,8 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
+                if user.is_staff:
+                    return HttpResponseRedirect(reverse('admins:index'))
                 return HttpResponseRedirect(reverse('masters:index'))
             else:
                 form.add_error(None, 'Invalid username or password')

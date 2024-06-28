@@ -8,3 +8,11 @@ def index(request):
         'branches': Branch.objects.filter(branchuser__user=request.user)
     }
     return render(request, 'admins/index.html', context)
+
+
+def all_masters(request):
+    context = {
+        'title': 'all_masters',
+        'branches': Branch.objects.filter(branchuser__user=request.user)
+    }
+    return render(request, 'admins/all_masters.html', context)
