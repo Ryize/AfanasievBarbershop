@@ -1,0 +1,198 @@
+{% extends 'admins/base_admins.html' %}
+{% load static %}
+{% load range_filter %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin_chairs.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center text-white my-5">{{ format_date }}</h1>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <a class="day-btn m-2" href="#" role="button" id="previous_day"><i
+                                class="bi bi bi-arrow-left-circle-fill px-1"></i>Предыдущий</a>
+                    <a class="day-btn m-2" href="#" role="button" id="last_day">Следующий<i
+                                class="bi bi bi-arrow-right-circle-fill px-1"></i></a>
+                </div>
+            </div>
+            <div class="row row-chair" id="chair" data-date="{{ date }}">
+                {% for chair in timetables_data %}
+                    <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">
+                        <div class="name_chair">
+                            <h3>Кресло {{ chair.num }}</h3>
+                        </div>
+                        <div class="card_body" data-chair-number="{{ chair.num }}">
+                            <div class="card_container flex-grow-1 d-flex justify-content-center align-items-center">
+                                {% if chair.t_mon_dict %}
+                                    <div class="row card_chair" id="chair">
+                                        <div class="col col-8 d-flex justify-content-center align-items-center">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_mon_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="del">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                                <input type="hidden" name="shift_mon" value="Yes">
+                                                <input type="hidden" name="shift_eve" value="No">
+                                                <div>
+                                                    <input class="input_style" type="text" id="start_time" name="start_time"
+                                                        value="09:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="end_time" name="end_time"
+                                                        value="15:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="first_name" name="first_name"
+                                                           value="{{ chair.t_mon_dict.first_name }}" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="last_name" name="last_name"
+                                                     value="{{ chair.t_mon_dict.last_name }}" disabled>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
+                                            <img class="img_master" src="{{ chair.t_mon_dict.image.url }}" alt="Фото мастера">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="but_del_work_mon" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-dash"></i></button>
+                                    </div>
+                                {% else %}
+                                    <div class="row card_chair" id="chair">
+                                        <div class="col col-8 d-flex justify-content-center align-items-center">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_mon_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="hidden" name="shift_mon" value="Yes">
+                                                <input type="hidden" name="shift_eve" value="No">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                                <div>
+                                                    <input class="input_style" type="text" id="start_time" name="start_time"
+                                                        value="09:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="end_time" name="end_time"
+                                                        value="15:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="first_name" name="first_name"
+                                                           value="Место не занято" disabled>
+                                                </div>
+                                                <div>
+                                                    <select class="input_style" aria-label="Default select example" id="last_name">
+                                                            <option value="#" selected>Место не занято</option>
+                                                            {% for master in masters %}
+                                                                <option value="{{ master.id }}">{{ master.last_name }}</option>
+                                                            {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
+                                            <img class="img_master" src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="Фото мастера">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="but_add_work_mon" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add" ></i></button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="card_container flex-grow-1 d-flex justify-content-center align-items-center">
+                                {% if chair.t_eve_dict %}
+                                    <div class="row card_chair" id="chair">
+                                        <div class="col col-8 d-flex justify-content-center align-items-center">
+                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="del">
+                                                <input type="hidden" name="shift_mon" value="No">
+                                                <input type="hidden" name="shift_eve" value="Yes">
+                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                                <div>
+                                                    <input class="input_style" type="text" id="start_time" name="start_time"
+                                                        value="15:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="end_time" name="end_time"
+                                                        value="20:00" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="first_name" name="first_name"
+                                                           value="{{ chair.t_eve_dict.first_name }}" disabled>
+                                                </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="last_name" name="last_name"
+                                                     value="{{ chair.t_eve_dict.last_name }}" disabled>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
+                                            <img class="img_master" src="{{ chair.t_eve_dict.image.url }}" alt="Фото мастера">
+                                        </div>
+                                    </div>
+                                    {% if request.user.id == chair.t_eve_dict.id  %}
+                                        <div class="row">
+                                            <button class="but_del_work_eve" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% else %}
+                                        <div class="row">
+                                            <button class="but_del_work_eve invisible" data-chair-num="{{ chair.num }}"><i
+                                                    class="bi bi-person-fill-dash"></i></button>
+                                        </div>
+                                    {% endif %} 
+                                {% else %}
+                                    <div class="row card_chair" id="chair">
+                                        <div class="col col-8 d-flex justify-content-center align-items-center">
+                                           <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
+                                               {% csrf_token %}
+                                               <input type="hidden" name="action" value="add">
+                                               <input type="hidden" name="shift_mon" value="No">
+                                               <input type="hidden" name="shift_eve" value="Yes">
+                                               <input type="hidden" name="chair_num" value="{{ chair.num }}">
+                                               <div>
+                                                   <input class="input_style" type="text" id="start_time" name="start_time" value="15:00" disabled>
+                                               </div>
+                                               <div>
+                                                   <input class="input_style" type="text" id="end_time" name="end_time" value="20:00" disabled>
+                                               </div>
+                                                <div>
+                                                    <input class="input_style" type="text" id="first_name" name="first_name" value="Место не занято" disabled>
+                                                </div>
+                                                <div><input class="input_style" type="text" id="last_name" name="last_name"
+                                                     value="Место не занято" disabled>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col col-4 col_img_master d-flex justify-content-center align-items-center">
+                                            <img class="img_master" src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="Фото мастера">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="but_add_work_eve" data-chair-num="{{ chair.num }}"><i
+                                                class="bi bi-person-fill-add"></i></button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+             </div>
+        </div>
+    </main>
+{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/add_del_masters.js' %}"></script>   
+    <script src="{% static 'js/filial.js' %}"></script>
+    <script src="{% static 'js/change_day.js' %}"></script>
+{% endblock %}
+

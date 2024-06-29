@@ -34,10 +34,10 @@
                         </li>
                         <li class="nav-item">
                             <select class="cus-filial" aria-label="Default select example" id="branchSelect">
-                                {% if address %}
-                                    <option selected>{{ address }}</option>
+                                {% if address.address %}
+                                    <option value="{{ address.id }}" selected>{{ address.address }}</option>
                                     {% for branch in branches %}
-                                        {% if branch.address != address %}
+                                        {% if branch.address != address.address %}
                                             <option value="{{ branch.id }}">{{ branch.address }}</option>
                                         {% endif %}
                                     {% endfor %}
