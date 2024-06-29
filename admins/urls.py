@@ -6,5 +6,5 @@ app_name = 'admins'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('all_masters/', all_masters, name='all_masters'),
+    path('all_masters/<int:branch_id>/', all_masters, name='all_masters'),
 ]

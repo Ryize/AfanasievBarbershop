@@ -9,61 +9,18 @@
     <main>
         <div class="container mt-5">
             <div class="row">
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h3 class="fio mt-1">Иван</h3>
-                    <h3 class="fio">Поддубный</h3>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-1">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/i (5).webp" alt="">
-                    <h2 class="fio mt-2">Иван</h2>
-                    <h2 class="fio">Поддубный</h2>
-                </div>
-                <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
-                    <img class="img_cus" src="img/add_master.webp" alt="">
-                    <h2 class="fio mt-2">Добавить</h2>
-                    <h2 class="fio">мастера</h2>
-                </div>
+                {% for master in masters %}
+                    <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
+                        <img class="img_cus" src="{{ master.image.url }}" alt="">
+                        <h3 class="fio mt-1">{{ master.first_name }}</h3>
+                        <h3 class="fio">{{ master.last_name }}</h3>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </main>
 {% endblock %}
-
 {% block js %}
-    
+    {{ block.super }}
+    <script src="{% static 'js/filial.js' %}"></script>
 {% endblock %}
