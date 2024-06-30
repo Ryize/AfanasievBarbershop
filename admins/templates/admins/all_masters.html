@@ -16,6 +16,13 @@
                         <h3 class="fio">{{ master.last_name }}</h3>
                     </div>
                 {% endfor %}
+                <a href="{% url 'users:register' %}" class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
+                    <div>
+                        <img class="img_cus" src="{% static 'img/add_master.webp' %}" alt="">
+                        <h2 class="fio mt-2">Добавить</h2>
+                        <h2 class="fio">мастера</h2>
+                    </div>
+                </a>
             </div>
         </div>
     </main>
