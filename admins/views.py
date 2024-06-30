@@ -31,30 +31,31 @@ def schedule(request, branch_id, date):
         chair_num = request.POST.get('chair_num')
         shift_mon = request.POST.get('shift_mon')
         shift_eve = request.POST.get('shift_eve')
+        user_id = request.POST.get('last_name')
         if action == 'add':
             if shift_mon == 'Yes' and shift_eve == 'No':
                 add_or_update_timetable_shift_mon(
                     branch=int(branch_id),
-                    user=request.user,
+                    user=user_id,
                     chair_num=chair_num,
                     date=date)
             elif shift_mon == 'No' and shift_eve == 'Yes':
                 add_or_update_timetable_shift_eve(
                     branch=int(branch_id),
-                    user=request.user,
+                    user=user_id,
                     chair_num=chair_num,
                     date=date)
         elif action == 'del':
             if shift_mon == 'Yes' and shift_eve == 'No':
                 delete_timetable_mon(
                     branch=int(branch_id),
-                    user=request.user,
+                    user=user_id,
                     chair_num=chair_num,
                     date=date)
             elif shift_mon == 'No' and shift_eve == 'Yes':
                 delete_timetable_eve(
                     branch=int(branch_id),
-                    user=request.user,
+                    user=user_id,
                     chair_num=chair_num,
                     date=date)
 
@@ -115,6 +116,7 @@ def format_date(date):
 def add_or_update_timetable_shift_mon(branch, user, chair_num, date):
     with transaction.atomic():
         branch = Branch.objects.get(id=branch)
+        user = User.objects.get(id=user)
         timetable, created = Timetable.objects.get_or_create(
             branch=branch,
             user=user,
@@ -129,6 +131,7 @@ def add_or_update_timetable_shift_mon(branch, user, chair_num, date):
 
 def add_or_update_timetable_shift_eve(branch, user, chair_num, date):
     branch = Branch.objects.get(id=branch)
+    user = User.objects.get(id=user)
     with transaction.atomic():
         timetable, created = Timetable.objects.get_or_create(
             branch=branch,
@@ -144,6 +147,7 @@ def add_or_update_timetable_shift_eve(branch, user, chair_num, date):
 
 def delete_timetable_mon(branch, user, chair_num, date):
     branch = Branch.objects.get(id=branch)
+    user = User.objects.get(id=user)
     with transaction.atomic():
         try:
             timetable = Timetable.objects.get(
@@ -164,6 +168,7 @@ def delete_timetable_mon(branch, user, chair_num, date):
 
 def delete_timetable_eve(branch, user, chair_num, date):
     branch = Branch.objects.get(id=branch)
+    user = User.objects.get(id=user)
     with transaction.atomic():
         try:
             timetable = Timetable.objects.get(
