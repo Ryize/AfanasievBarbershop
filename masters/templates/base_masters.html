@@ -47,7 +47,10 @@
                         </li>
                     </ul>
                     <div class="nav-item p-4">
-                        <a class="log-btn" href="{% url 'users:logout' %}" role="button">Выход <i class="bi bi-person-circle px-1"></i></a>
+                        <a class="cus-btn" href="{% url 'users:profile' %}" role="button">Профиль <i class="bi bi-person-circle px-1"></i></a>
+                    </div>
+                    <div class="nav-item p-4">
+                        <a class="log-btn" href="{% url 'users:logout' %}" role="button">Выход <i class="bi bi-box-arrow-right px-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -71,7 +74,7 @@
                             <div class="col-12">
                                 <div class="text-field">
                                     <label class="text-field__label" for="total_hours_in_month">Запланированное количество
-                                        часов в августе</label>
+                                        часов</label>
                                     <input class="text-field__input" type="text" name="total_hours_in_month" id=""
                                         placeholder="{{ total_hours_in_month }}" value="" disabled>
                                 </div>

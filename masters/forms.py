@@ -10,4 +10,4 @@ class ChairMonForm(forms.Form):
     first_name = forms.CharField(max_length=100,
                                  widget=forms.TextInput(attrs={'class': 'input_style', 'disabled': 'disabled'}))
     last_name = forms.CharField(max_length=100,
-                                widget=forms.TextInput(attrs={'class': 'input_style', 'disabled': 'disabled'}))
+                                idget=forms.TextInput(attrs={'class': 'input_style', 'disabled': 'disabled'}))

@@ -47,18 +47,18 @@ class UserRegistrationForm(UserCreationForm):
 
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4'
+        'class': 'form-control py-2'
     }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4'
+        'class': 'form-control py-2'
     }))
     image = forms.ImageField(widget=forms.FileInput(attrs={
         'class': 'custom-file-input'}), required=False)
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4'
+        'class': 'form-control py-2'
     }))
     email = forms.EmailField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4'
+        'class': 'form-control py-2'
     }))
 
     class Meta:

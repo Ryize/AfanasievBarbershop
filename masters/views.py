@@ -197,7 +197,6 @@ def total_hours_in_month(user):
 
 def hours_worked_in_month(user):
     current_date = datetime.now()
-    print(current_date)
     hours_worked_in_month = 0
 
     first_day_of_month = current_date.replace(day=1)
@@ -213,3 +212,4 @@ def hours_worked_in_month(user):
         if _.shift_eve:
             hours_worked_in_month += 5
     return hours_worked_in_month
+
