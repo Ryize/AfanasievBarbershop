@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css %}
-     <link href="{% static 'vendor/css/profile.css' %}" rel="stylesheet">
+     <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -55,13 +55,56 @@
                                 {{ form.email }}
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-lg-12">
                                 <input class="btn day-btn" type="submit" value="Сохранить">
                             </div>
                         </div>
                     </div>
                 </form>
+            </div>
+        <div class="row">
+            <div class="col-12">
+                <h2 class="my-5 text-center text-white">Расписание</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for timetable_day in timetable_month%}
+                    <div class="col-xxl-2 col-lg-3 col-md-6 d-flex justify-content-center mb-3">
+                        <div class="row card_chair" id="chair">
+                            <div class="col-12 d-flex justify-content-center align-items-center my-2">
+                                <form action="#" >
+                                    <div>
+                                        <label class="small mb-1" for="date">Дата</label>
+                                        <input class="input_style" type="text" id="date" name="date"
+                                               value="{{ timetable_day.date }}" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="small mb-1" for="branch">Филиал</label>
+                                        <input class="input_style" type="text" id="branch" name="branch"
+                                               value="{{ timetable_day.branch }}" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="small mb-1" for="chair">Кресло</label>
+                                        <input class="input_style" type="text" id="chair" name="last_name"
+                                         value="№ {{ timetable_day.chair_number }}" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="small mb-1" for="start_time">Время работы</label>
+                                        <input class="input_style" type="text" id="start_time" name="start_time"
+                                            value="{{ timetable_day.start_time }}" disabled>
+                                    </div>
+                                    <div>
+                                        <input class="input_style" type="text" id="end_time" name="end_time"
+                                            value="{{ timetable_day.end_time }}" disabled>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
             </div>
         </div>
         <p>{{ user_timetable_month }}</p>
