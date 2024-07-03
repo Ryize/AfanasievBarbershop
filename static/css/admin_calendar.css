@@ -1,0 +1,140 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+.calendar-wrapper {
+    max-width: 900px;
+    margin: 3em auto;
+    padding: 2em;
+    border: 1px solid #AA6009;
+    border-radius: 5px;
+    background: #393C42;
+}
+
+table {
+    clear: both;
+    width: 100%;
+    border: 1px solid #AA6009;
+    border-collapse: collapse;
+}
+
+td {
+    height: 80px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+
+    font-size: 36px;
+}
+
+@media (max-width: 576px) {
+    td {
+        height: 46px;
+        font-size: 16px;
+    }
+}
+
+thead td {
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 40px;
+    text-shadow: 2px 2px 1px black;
+}
+
+@media (max-width: 576px) {
+    thead td {
+        font-size: 20px;
+    }
+}
+
+.week_days {
+    text-shadow: 2px 2px 1px #AA6009;
+}
+
+@media (max-width: 576px) {
+    .week_days {
+        text-shadow: 1px 2px 1px #AA6009;
+    }
+}
+
+td.not-current {
+    opacity: 10%;
+}
+
+td.today {
+    font-weight: 700;
+    color: #AA6009;
+    font-size: 42px;
+}
+
+@media (max-width: 576px) {
+    td.today {
+        font-size: 20px;
+    }
+}
+
+.weekend {
+    color: #922929;
+}
+
+td a {
+    color: inherit;
+    /* Цвет текста как у родителя */
+    text-decoration: none;
+    /* Убираем подчеркивание */
+    background: none;
+    /* Убираем фон */
+    padding: 0;
+    /* Убираем отступы */
+    margin: 0;
+    /* Убираем поля */
+    border: none;
+    /* Убираем границу */
+}
+
+#btnPrev {
+    float: left;
+    margin-bottom: 20px;
+}
+
+#btnNext {
+    float: right;
+    margin-bottom: 20px;
+}
+
+#btnPrev,
+#btnNext {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: #c0c0c0;
+    cursor: pointer;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 576px) {
+
+    #btnPrev,
+    #btnNext {
+        font-size: 16px;
+    }
+}
+
+#btnPrev:hover,
+#btnNext:hover {
+    text-decoration: underline;
+    text-decoration-color: #AA6009;
+}
+
+.arrow_l {
+    color: #AA6009;
+    margin-right: 10px;
+}
+
+.arrow_r {
+    color: #AA6009;
+    margin-left: 10px;
+}

@@ -1,0 +1,140 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+:root {
+    --red: #922929;
+    --green: #0E6827;
+    --grey: #474A51;
+    --orange: #AA6009;
+    --light_grey: #D9D9D9;
+    --dark_grey: #393C42;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+body {
+    width: 100%;
+}
+
+.red {
+    color: var(--red);
+}
+
+.green {
+    color: var(--green);
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.grey {
+    color: var(--grey);
+}
+
+.light_grey {
+    color: var(--light_grey);
+}
+
+.dark_grey {
+    color: var(--dark_grey);
+}
+
+.bg-grey {
+    background: var(--grey);
+}
+
+.bg-dark_grey {
+    background: var(--dark_grey);
+}
+
+.cus-btn {
+    min-width: 100px;
+    font-family: inherit;
+    appearance: none;
+    border: 1px solid white;
+    border-radius: 15px;
+    color: #fff;
+    padding: 20px 28px;
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cus-btn:hover {
+    border: none;
+    box-shadow: 0 0 0 2px var(--red);
+}
+
+.cus-btn:focus {
+    border-color: var(--red);
+}
+
+.log-btn {
+    min-width: 100px;
+    font-family: inherit;
+    appearance: none;
+    border: 1px solid var(--orange);
+    border-radius: 15px;
+    color: #fff;
+    padding: 20px 28px;
+    font-size: 24px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.log-btn:hover {
+    border: none;
+    box-shadow: 0 0 0 4px var(--orange);
+}
+
+.nav-filial {
+    font-size: 30px;
+}
+
+.cus-filial {
+    background-color: black;
+    min-width: 100px;
+    font-family: inherit;
+    border: none;
+    appearance: none;
+    color: #fff;
+    padding: 20px 28px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.cus-filial:hover {
+    font-size: 28px;
+    outline: none;
+}
+
+.cus-filial:focus {
+    outline: none;
+}
+
+.day-btn {
+        min-width: 50px;
+        font-family: inherit;
+        appearance: none;
+        border: 1px solid var(--orange);
+        border-radius: 15px;
+        color: #fff;
+        padding: 10px 18px;
+        font-size: 20px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+@media (max-width: 992px) {
+    .day-btn {
+        font-size: 12px;
+    }
+}
+
+.day-btn:hover {
+    border: none;
+    box-shadow: 0px 0px 0px 3px var(--orange);
+}
