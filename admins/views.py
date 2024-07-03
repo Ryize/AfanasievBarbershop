@@ -25,6 +25,22 @@ def all_masters(request, branch_id):
     return render(request, 'admins/all_masters.html', context)
 
 
+def master(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+
+    else:
+        form = UserProfileForm(instance=request.user)
+    context = {'title': 'Profile',
+               'total_hours_in_month': total_hours_in_month(request.user),
+               'hours_worked_in_month': hours_worked_in_month(request.user),
+               'timetable_month': user_timetable_month(request.user),
+               'form': form}
+    return render(request, 'users/profile.html', context)
+
 def schedule(request, branch_id, date):
     if request.method == 'POST':
         action = request.POST['action']

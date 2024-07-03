@@ -10,11 +10,13 @@
         <div class="container mt-5">
             <div class="row">
                 {% for master in masters %}
-                    <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
-                        <img class="img_cus" src="{{ master.image.url }}" alt="">
-                        <h3 class="fio mt-1">{{ master.first_name }}</h3>
-                        <h3 class="fio">{{ master.last_name }}</h3>
-                    </div>
+                    <a href="{% url 'admins:master' master.id %}">
+                        <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
+                            <img class="img_cus" src="{{ master.image.url }}" alt="">
+                            <h3 class="fio mt-1">{{ master.first_name }}</h3>
+                            <h3 class="fio">{{ master.last_name }}</h3>
+                        </div>
+                    </a>
                 {% endfor %}
                 <a href="{% url 'users:register' %}" class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
                     <div>
