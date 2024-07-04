@@ -35,9 +35,6 @@ class UserRegistrationForm(UserCreationForm):
         queryset=Branch.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         label='Выберите филиалы'
-
-
-
     )
 
     class Meta:

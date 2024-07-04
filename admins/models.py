@@ -9,7 +9,7 @@ class Branch(models.Model):
     chairs = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.name
+        return self.address
 
 
 class BranchUser(models.Model):

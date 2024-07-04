@@ -23,7 +23,7 @@
                              class="img-thumbnail">
                     </div>
                 </div>
-                <form class="text-white mb-3"  action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+                <form class="text-white mb-3"  action="{% url 'admins:master' address.id user.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="container">
                         <div class="row my-3">
@@ -110,6 +110,5 @@
 {% endblock %}
 {% block js %}
     {{ block.super }}
-    <script src="{% static 'js/filial.js' %}"></script>
     <script src="{% static 'js/all_masters.js' %}"></script>
 {% endblock %}

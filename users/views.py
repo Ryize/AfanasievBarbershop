@@ -34,7 +34,7 @@ def login(request):
     return render(request, 'users/login.html', context)
 
 
-def register(request):
+def register(request, branch_id):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -42,10 +42,11 @@ def register(request):
             branches = form.cleaned_data['branches']
             for branch in branches:
                 BranchUser.objects.create(user=user, branch=branch)
-            return HttpResponseRedirect(reverse('users:login'))
+            return HttpResponseRedirect(reverse('admins:all_masters', args=[branch_id]))
     else:
         form = UserRegistrationForm()
     context = {'title': ' Регистрация',
+               'address': Branch.objects.get(id=branch_id),
                'form': form}
     return render(request, 'users/register.html', context)
 

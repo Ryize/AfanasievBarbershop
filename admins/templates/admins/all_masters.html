@@ -10,15 +10,17 @@
         <div class="container mt-5">
             <div class="row">
                 {% for master in masters %}
-                    <a href="{% url 'admins:master' master.id branch_id %}" class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
-                        <div>
-                            <img class="img_cus" src="{{ master.image.url }}" alt="">
-                            <h3 class="fio mt-1">{{ master.first_name }}</h3>
-                            <h3 class="fio">{{ master.last_name }}</h3>
-                        </div>
-                    </a>
+                    {% if not master.is_staff %}
+                        <a href="#" class="btn master col col-md-6 col-lg-4 col-xxl-3  text-center mb-3" data-branchId="{{ address.id }}" data-masterId="{{ master.id }}">
+                            <div>
+                                <img class="img_cus" src="{{ master.image.url }}" alt="">
+                                <h3 class="fio mt-1">{{ master.first_name }}</h3>
+                                <h3 class="fio">{{ master.last_name }}</h3>
+                            </div>
+                        </a>
+                    {% endif %}
                 {% endfor %}
-                <a href="{% url 'users:register' %}" class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
+                <a href="{% url 'users:register' address.id %}" class="btn col col-md-6 col-lg-4 col-xxl-3  text-center mb-4">
                     <div>
                         <img class="img_cus" src="{% static 'img/add_master.webp' %}" alt="">
                         <h2 class="fio mt-2">Добавить</h2>
@@ -32,4 +34,5 @@
 {% block js %}
     {{ block.super }}
     <script src="{% static 'js/filial.js' %}"></script>
+    <script src="{% static 'js/the_master.js' %}"></script>
 {% endblock %}

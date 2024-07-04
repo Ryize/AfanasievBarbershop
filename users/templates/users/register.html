@@ -21,7 +21,7 @@
                         <h3 class="text-center font-weight-light my-4">Регистрация</h3>
                     </div>
                     <div class="card-body text-white" style="background: #393C42">
-                        <form action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'users:register' address.id %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-row my-3">
                                 <div class="col-lg-12">

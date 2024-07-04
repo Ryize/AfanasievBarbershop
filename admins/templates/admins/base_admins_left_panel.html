@@ -35,7 +35,7 @@
                         <li class="nav-item">
                             <select class="cus-filial" aria-label="Default select example" id="branchSelect">
                                 {% if address %}
-                                    <option selected>{{ address.address }}</option>
+                                    <option value="{{ address.id }}" selected>{{ address.address }}</option>
                                     {% for branch in branches %}
                                         {% if branch.address != address.address %}
                                             <option value="{{ branch.id }}">{{ branch.address }}</option>
@@ -100,6 +100,9 @@
                             </div>
                         {% endif %}
                     </div>
+                    <div>
+                        <a class="btn btn-dark btn_del_master" href="{% url 'admins:del_master' address.id user.id %}">Удалить мастера</a>
+                    </div>
                 </div>
                 <div class="col-12 col-md-9 bg-grey order-lg-2 order-1">
                     {% block content %}
@@ -110,9 +113,6 @@
         </div>
     </main>
     {% block js %}
-        <script src="{% static 'js/add_del_masters.js' %}"></script>   
-        <script src="{% static 'js/filial.js' %}"></script>
-        <script src="{% static 'js/change_day.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
 
