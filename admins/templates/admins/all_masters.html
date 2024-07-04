@@ -10,8 +10,8 @@
         <div class="container mt-5">
             <div class="row">
                 {% for master in masters %}
-                    <a href="{% url 'admins:master' master.id %}">
-                        <div class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
+                    <a href="{% url 'admins:master' master.id branch_id %}" class="col col-md-6 col-lg-4 col-xxl-3  text-center mb-3">
+                        <div>
                             <img class="img_cus" src="{{ master.image.url }}" alt="">
                             <h3 class="fio mt-1">{{ master.first_name }}</h3>
                             <h3 class="fio">{{ master.last_name }}</h3>
