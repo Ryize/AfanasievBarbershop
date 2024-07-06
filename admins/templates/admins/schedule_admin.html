@@ -90,7 +90,9 @@
                                                 <div>
                                                     <select class="input_style" aria-label="Default select example" id="last_name" name="last_name">
                                                             {% for master in masters %}
-                                                                <option value="{{ master.id }}">{{ master.last_name }}</option>
+                                                                {% if not master.is_staff %}
+                                                                    <option value="{{ master.id }}">{{ master.last_name }}</option>
+                                                                {% endif %}
                                                             {% endfor %}
                                                     </select>
                                                 </div>
@@ -164,7 +166,9 @@
                                                 <div>
                                                     <select class="input_style" aria-label="Default select example" id="last_name" name="last_name">
                                                             {% for master in masters %}
-                                                                <option value="{{ master.id }}">{{ master.last_name }}</option>
+                                                                {% if not master.is_staff %}
+                                                                    <option value="{{ master.id }}">{{ master.last_name }}</option>
+                                                                {% endif %}
                                                             {% endfor %}
                                                     </select>
                                                 </div>

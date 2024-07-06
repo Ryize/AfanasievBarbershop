@@ -1,6 +1,7 @@
 import calendar
 from datetime import datetime, timedelta
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.db import transaction
@@ -8,6 +9,7 @@ from django.db import transaction
 from .models import Timetable, Branch
 
 
+@login_required
 def index(request):
     context = {
         'title': 'masters',
@@ -18,6 +20,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def schedule(request, branch_id, date):
     if request.method == 'POST':
         action = request.POST['action']
@@ -68,6 +71,7 @@ def schedule(request, branch_id, date):
     return render(request, 'schedule.html', context)
 
 
+@login_required
 def get_timetables_data(branch_id, date):
     timetables_list = []
     data_timetables = Timetable.objects.filter(branch=branch_id, date=date).all()

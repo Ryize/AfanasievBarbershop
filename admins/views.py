@@ -9,8 +9,20 @@ from django.urls import reverse
 from masters.models import Timetable
 from users.forms import UserProfileForm
 from .models import Branch, User
+from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
 
 
+def staff_required(view_func):
+    @login_required
+    def _wrapped_view(request, *args, **kwargs):
+        if not request.user.is_staff:
+            return HttpResponseForbidden("You are not authorized to view this page")
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+
+@staff_required
 def index(request):
     context = {
         'title': 'admins',
@@ -19,6 +31,7 @@ def index(request):
     return render(request, 'admins/index.html', context)
 
 
+@staff_required
 def all_masters(request, branch_id):
     context = {
         'title': 'all_masters',
@@ -29,6 +42,7 @@ def all_masters(request, branch_id):
     return render(request, 'admins/all_masters.html', context)
 
 
+@staff_required
 def master(request, branch_id, master_id):
     user = User.objects.get(id=master_id)
     if request.method == 'POST':
@@ -50,6 +64,7 @@ def master(request, branch_id, master_id):
     return render(request, 'admins/master_profile.html', context)
 
 
+@staff_required
 def del_master(request, branch_id, master_id):
     user = User.objects.get(id=master_id)
     user.delete()
@@ -57,6 +72,7 @@ def del_master(request, branch_id, master_id):
     return HttpResponseRedirect(redirect_url)
 
 
+@staff_required
 def schedule(request, branch_id, date):
     if request.method == 'POST':
         action = request.POST['action']
