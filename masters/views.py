@@ -71,7 +71,6 @@ def schedule(request, branch_id, date):
     return render(request, 'schedule.html', context)
 
 
-@login_required
 def get_timetables_data(branch_id, date):
     timetables_list = []
     data_timetables = Timetable.objects.filter(branch=branch_id, date=date).all()
