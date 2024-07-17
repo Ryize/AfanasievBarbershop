@@ -78,7 +78,6 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('users:login'))
 
-
 def total_hours_in_month(user):
     current_date = datetime.now()
     total_hours_in_month = 0
