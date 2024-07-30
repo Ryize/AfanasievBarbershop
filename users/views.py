@@ -3,14 +3,15 @@ from django.contrib import auth
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from admins.models import BranchUser, Branch
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 from admins.views import staff_required
 
 from services.business_logic import BusinessLogic
+from services.data_access import DataAccess
 
 logic = BusinessLogic()
+dataAccess = DataAccess()
 
 
 def login(request):
@@ -42,13 +43,12 @@ def register(request, branch_id):
         if form.is_valid():
             user = form.save()
             branches = form.cleaned_data['branches']
-            for branch in branches:
-                BranchUser.objects.create(user=user, branch=branch)
+            dataAccess.add_branch_user(user, branches)
             return HttpResponseRedirect(reverse('admins:all_masters', args=[branch_id]))
     else:
         form = UserRegistrationForm()
     context = {'title': ' Регистрация',
-               'address': Branch.objects.get(id=branch_id),
+               'address': dataAccess.get_branch(branch_id),
                'form': form}
     return render(request, 'users/register.html', context)
 

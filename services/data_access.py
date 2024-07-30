@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.db.models import Q
 
-from admins.models import Branch
+from admins.models import Branch, BranchUser
 from masters.models import Timetable
 from users.models import User
 
@@ -38,6 +38,11 @@ class DataAccess:
     @staticmethod
     def get_masters(branch_id):
         return User.objects.filter(branchuser__branch_id=branch_id)
+
+    @staticmethod
+    def add_branch_user(user, branches):
+        for branch in branches:
+            BranchUser.objects.create(user=user, branch=branch)
 
     def get_timetables_data(self, branch_id, date):
         timetables_list = []
