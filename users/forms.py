@@ -3,7 +3,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 
 from admins.models import Branch
 from users.models import User
-from django.forms import ModelForm, Form
 
 
 class UserLoginForm(AuthenticationForm):
