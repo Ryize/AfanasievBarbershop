@@ -27,8 +27,6 @@ def login(request):
                 return HttpResponseRedirect(reverse('masters:index'))
             else:
                 form.add_error(None, 'Invalid username or password')
-        else:
-            print(form.errors)
     else:
         form = UserLoginForm()
 
@@ -77,6 +75,7 @@ def profile(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('users:login'))
+
 
 def total_hours_in_month(user):
     current_date = datetime.now()
@@ -130,10 +129,9 @@ def user_timetable_month(user):
     )
 
     for timetable_record in timetable_records:
-        timetable_day = {}
-        timetable_day['date'] = timetable_record.date.strftime("%d.%m.%Y")
-        timetable_day['branch'] = timetable_record.branch.address
-        timetable_day['chair_number'] = timetable_record.chair_number
+        timetable_day = {'date': timetable_record.date.strftime("%d.%m.%Y"),
+                         'branch': timetable_record.branch.address,
+                         'chair_number': timetable_record.chair_number}
         if timetable_record.shift_mon and timetable_record.shift_eve:
             timetable_day['start_time'] = '9:00'
             timetable_day['end_time'] = '20:00'

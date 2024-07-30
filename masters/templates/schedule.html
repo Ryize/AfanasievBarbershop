@@ -37,8 +37,7 @@
                                                 {% csrf_token %}
                                                 <input type="hidden" name="action" value="del">
                                                 <input type="hidden" name="chair_num" value="{{ chair.num }}">
-                                                <input type="hidden" name="shift_mon" value="Yes">
-                                                <input type="hidden" name="shift_eve" value="No">
+                                                <input type="hidden" name="shift_type" value="mon">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
                                                         value="09:00" disabled>
@@ -78,8 +77,7 @@
                                             <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_mon_{{ chair.num }}">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="action" value="add">
-                                                <input type="hidden" name="shift_mon" value="Yes">
-                                                <input type="hidden" name="shift_eve" value="No">
+                                                <input type="hidden" name="shift_type" value="mon">
                                                 <input type="hidden" name="chair_num" value="{{ chair.num }}">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
@@ -116,8 +114,7 @@
                                             <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="action" value="del">
-                                                <input type="hidden" name="shift_mon" value="No">
-                                                <input type="hidden" name="shift_eve" value="Yes">
+                                                <input type="hidden" name="shift_type" value="eve">
                                                 <input type="hidden" name="chair_num" value="{{ chair.num }}">
                                                 <div>
                                                     <input class="input_style" type="text" id="start_time" name="start_time"
@@ -158,8 +155,7 @@
                                            <form action="{% url 'masters:schedule' branch_id  date %}" method="post" id="work_eve_{{ chair.num }}">
                                                {% csrf_token %}
                                                <input type="hidden" name="action" value="add">
-                                               <input type="hidden" name="shift_mon" value="No">
-                                               <input type="hidden" name="shift_eve" value="Yes">
+                                               <input type="hidden" name="shift_type" value="eve">
                                                <input type="hidden" name="chair_num" value="{{ chair.num }}">
                                                <div>
                                                    <input class="input_style" type="text" id="start_time" name="start_time" value="15:00" disabled>
