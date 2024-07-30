@@ -1,18 +1,31 @@
-from django.http import HttpResponseRedirect
+"""
+Модуль содержит функции представления для административных задач.
+"""
+
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 
 from users.forms import UserProfileForm
-
 from services.business_logic import BusinessLogic, staff_required
 from services.data_access import DataAccess
 
+# Инициализация бизнес-логики и доступа к данным.
 logic = BusinessLogic()
 dataAccess = DataAccess()
 
 
 @staff_required
-def index(request):
+def index(request) -> HttpResponse:
+    """
+    Обработчик для главной страницы администратора.
+
+    Args:
+        request: Запрос HTTP.
+
+    Returns:
+        HttpResponse: HTML-код главной страницы администратора.
+    """
     context = {
         'title': 'admins',
         'branches': dataAccess.get_branches_user(request.user),
@@ -21,7 +34,17 @@ def index(request):
 
 
 @staff_required
-def all_masters(request, branch_id):
+def all_masters(request, branch_id: int) -> HttpResponse:
+    """
+    Обработчик для страницы со списком всех мастеров филиала.
+
+    Args:
+        request: Запрос HTTP.
+        branch_id (int): Идентификатор филиала.
+
+    Returns:
+        HttpResponse: HTML-код страницы со списком всех мастеров.
+    """
     context = {
         'title': 'all_masters',
         'branches': dataAccess.get_branches_user(request.user),
@@ -32,7 +55,18 @@ def all_masters(request, branch_id):
 
 
 @staff_required
-def master(request, branch_id, master_id):
+def master(request, branch_id: int, master_id: int) -> HttpResponse:
+    """
+    Обработчик для страницы профиля мастера.
+
+    Args:
+        request: Запрос HTTP.
+        branch_id (int): Идентификатор филиала.
+        master_id (int): Идентификатор мастера.
+
+    Returns:
+        HttpResponse: HTML-код страницы профиля мастера.
+    """
     user = dataAccess.get_user(master_id)
     if request.method == 'POST':
         form = UserProfileForm(instance=user, data=request.POST, files=request.FILES)
@@ -42,19 +76,32 @@ def master(request, branch_id, master_id):
             return HttpResponseRedirect(redirect_url)
     else:
         form = UserProfileForm(instance=user)
-    context = {'title': 'Profile',
-               'user': user,
-               'total_hours_in_month': logic.total_hours_in_month(user),
-               'hours_worked_in_month': logic.hours_worked_in_month(user),
-               'timetable_month': logic.user_timetable_month(user),
-               'branches': dataAccess.get_branches_user(request.user),
-               'address': dataAccess.get_branch(branch_id),
-               'form': form}
+    context = {
+        'title': 'Profile',
+        'user': user,
+        'total_hours_in_month': logic.total_hours_in_month(user),
+        'hours_worked_in_month': logic.hours_worked_in_month(user),
+        'timetable_month': logic.user_timetable_month(user),
+        'branches': dataAccess.get_branches_user(request.user),
+        'address': dataAccess.get_branch(branch_id),
+        'form': form
+    }
     return render(request, 'admins/master_profile.html', context)
 
 
 @staff_required
-def del_master(request, branch_id, master_id):
+def del_master(request, branch_id: int, master_id: int) -> HttpResponseRedirect:
+    """
+    Обработчик для удаления мастера.
+
+    Args:
+        request: Запрос HTTP.
+        branch_id (int): Идентификатор филиала.
+        master_id (int): Идентификатор мастера.
+
+    Returns:
+        HttpResponseRedirect: Перенаправление на страницу со списком всех мастеров.
+    """
     user = dataAccess.get_user(master_id)
     user.delete()
     redirect_url = reverse('admins:all_masters', args=[branch_id])
@@ -62,7 +109,18 @@ def del_master(request, branch_id, master_id):
 
 
 @staff_required
-def schedule(request, branch_id, date):
+def schedule(request, branch_id: int, date: str) -> HttpResponse:
+    """
+    Обработчик для страницы расписания.
+
+    Args:
+        request: Запрос HTTP.
+        branch_id (int): Идентификатор филиала.
+        date (str): Дата расписания.
+
+    Returns:
+        HttpResponse: HTML-код страницы расписания.
+    """
     if request.method == 'POST':
         action = request.POST['action']
         chair_num = request.POST.get('chair_num')
@@ -99,4 +157,3 @@ def schedule(request, branch_id, date):
     }
 
     return render(request, 'admins/schedule_admin.html', context)
-

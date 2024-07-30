@@ -1,15 +1,29 @@
+"""
+Модуль содержит функции представления для управления расписанием и профилем мастера.
+"""
+
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from services.business_logic import BusinessLogic
 from services.data_access import DataAccess
 
+# Инициализация бизнес-логики и доступа к данным.
 logic = BusinessLogic()
 dataAccess = DataAccess()
 
-
 @login_required
-def index(request):
+def index(request) -> HttpResponse:
+    """
+    Обработчик для главной страницы мастеров.
+
+    Args:
+        request: Запрос HTTP.
+
+    Returns:
+        HttpResponse: HTML-код главной страницы мастеров.
+    """
     context = {
         'title': 'masters',
         'branches': dataAccess.get_branches_user(request.user),
@@ -18,9 +32,19 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
 @login_required
-def schedule(request, branch_id, date):
+def schedule(request, branch_id: int, date: str) -> HttpResponse:
+    """
+    Обработчик для страницы расписания мастеров.
+
+    Args:
+        request: Запрос HTTP.
+        branch_id (int): Идентификатор филиала.
+        date (str): Дата расписания.
+
+    Returns:
+        HttpResponse: HTML-код страницы расписания мастеров.
+    """
     if request.method == 'POST':
         action = request.POST['action']
         chair_num = request.POST.get('chair_num')
