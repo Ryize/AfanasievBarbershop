@@ -7,7 +7,7 @@ from .models import Branch, User
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 
-from business_logic import BusinessLogic
+from services.business_logic import BusinessLogic
 
 logic = BusinessLogic()
 

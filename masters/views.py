@@ -1,14 +1,9 @@
-import calendar
-from datetime import datetime, timedelta
-
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from django.shortcuts import render, redirect
-from django.db import transaction
+from django.shortcuts import render
 
-from .models import Timetable, Branch
+from .models import Branch
 
-from business_logic import BusinessLogic
+from services.business_logic import BusinessLogic
 
 logic = BusinessLogic()
 

@@ -1,18 +1,14 @@
-from datetime import datetime, timedelta
-
-from django.db.models import Q
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth, messages
+from django.contrib import auth
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from admins.models import BranchUser, Branch
-from masters.models import Timetable
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 from admins.views import staff_required
 
-from business_logic import BusinessLogic
+from services.business_logic import BusinessLogic
 
 logic = BusinessLogic()
 
