@@ -3,7 +3,8 @@
 """
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
+                                       UserCreationForm)
 
 from admins.models import Branch
 from users.models import User

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from masters.views import index, schedule
 
 app_name = 'masters'

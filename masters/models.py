@@ -3,6 +3,7 @@
 """
 
 from django.db import models
+
 from admins.models import Branch
 from users.models import User
 

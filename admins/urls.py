@@ -1,6 +1,6 @@
 from django.urls import path
 
-from admins.views import index, all_masters, schedule, master, del_master
+from admins.views import all_masters, del_master, index, master, schedule
 
 app_name = 'admins'
 

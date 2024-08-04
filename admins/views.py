@@ -2,13 +2,13 @@
 Модуль содержит функции представления для административных задач.
 """
 
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from users.forms import UserProfileForm
 from services.business_logic import BusinessLogic, staff_required
 from services.data_access import DataAccess
+from users.forms import UserProfileForm
 
 # Инициализация бизнес-логики и доступа к данным.
 logic = BusinessLogic()
@@ -84,7 +84,7 @@ def master(request, branch_id: int, master_id: int) -> HttpResponse:
         'timetable_month': logic.user_timetable_month(user),
         'branches': dataAccess.get_branches_user(request.user),
         'address': dataAccess.get_branch(branch_id),
-        'form': form
+        'form': form,
     }
     return render(request, 'admins/master_profile.html', context)
 
@@ -155,5 +155,4 @@ def schedule(request, branch_id: int, date: str) -> HttpResponse:
         'timetables_data': dataAccess.get_timetables_data(branch_id, date),
         'masters': dataAccess.get_masters(branch_id)
     }
-
     return render(request, 'admins/schedule_admin.html', context)

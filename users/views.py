@@ -2,15 +2,15 @@
 Модуль содержит функции представления для управления пользователями: вход, регистрация, профиль и выход.
 """
 
-from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect, render
+from django.urls import reverse
 
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from admins.views import staff_required
 from services.business_logic import BusinessLogic
 from services.data_access import DataAccess
+from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 
 # Инициализация бизнес-логики и доступа к данным.
 logic = BusinessLogic()
@@ -30,9 +30,7 @@ def login(request):
     if request.method == 'POST':
         form = UserLoginForm(request, request.POST)
         if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
+            user = auth.authenticate(**form.cleaned_data)
             if user:
                 auth.login(request, user)
                 if user.is_staff:
