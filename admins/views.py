@@ -1,7 +1,7 @@
 """
 Модуль содержит функции представления для административных задач.
 """
-
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -126,14 +126,18 @@ def schedule(request, branch_id: int, date: str) -> HttpResponse:
         chair_num = request.POST.get('chair_num')
         shift_type = request.POST.get('shift_type')
         user_id = request.POST.get('last_name')
+        user = dataAccess.get_user(user_id)
         if action == 'add':
-            dataAccess.add_or_update_timetable_shift(
-                branch_id=int(branch_id),
-                user_id=user_id,
-                chair_num=chair_num,
-                date=date,
-                shift_type=shift_type
-            )
+            if dataAccess.check_timetables(user, date, shift_type):
+                messages.warning(request, ' Мастер уже занимает кресло на эту смену и день!')
+            else:
+                dataAccess.add_or_update_timetable_shift(
+                    branch_id=int(branch_id),
+                    user_id=user_id,
+                    chair_num=chair_num,
+                    date=date,
+                    shift_type=shift_type
+                )
         elif action == 'del':
             dataAccess.delete_timetable_shift(
                 branch_id=int(branch_id),

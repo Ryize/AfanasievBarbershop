@@ -2,6 +2,7 @@
 Модуль содержит класс DataAccess для управления доступом к данным и выполнения операций с моделями.
 """
 from datetime import datetime
+from typing import Optional
 
 from django.db import transaction
 from django.db.models import Q
@@ -138,6 +139,17 @@ class DataAccess:
                 }
             timetables_list.append(timetables)
         return timetables_list
+
+    def check_timetables(self, user: User, date: str, shift_type: str) -> Optional[Timetable]:
+        if shift_type == 'mon':
+            timetables = Timetable.objects.filter(
+                Q(date=date) & Q(user=user) & (Q(shift_mon=True))
+            )
+        elif shift_type == 'eve':
+            timetables = Timetable.objects.filter(
+                Q(date=date) & Q(user=user) & (Q(shift_eve=True))
+            )
+        return timetables
 
     def add_or_update_timetable_shift(self, branch_id: int, user_id: int, chair_num: int, date: str, shift_type: str):
         """

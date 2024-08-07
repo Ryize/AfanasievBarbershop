@@ -83,3 +83,13 @@ input.input_style[disabled] {
     background-color: white;
     color: initial;
 }
+
+.banner-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f39c12;
+    background-color: #f1c40f;
+    color: #333;
+    border-radius: 5px;
+    font-size: 16px;
+}

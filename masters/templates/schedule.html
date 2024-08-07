@@ -22,6 +22,13 @@
                                 class="bi bi bi-arrow-right-circle-fill px-1"></i></a>
                 </div>
             </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="banner-message{% if message.tags %} {{ message.tags }}{% endif %} col col-12 col-lg-6 col-xxl-4 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="row row-chair" id="chair" data-date="{{ date }}">
                 {% for chair in timetables_data %}
                     <div class="col col-12 col-lg-6 col-xxl-4 d-flex flex-column align-items-center mb-5">

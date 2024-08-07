@@ -1,7 +1,7 @@
 """
 Модуль содержит функции представления для управления расписанием и профилем мастера.
 """
-
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -50,13 +50,16 @@ def schedule(request, branch_id: int, date: str) -> HttpResponse:
         chair_num = request.POST.get('chair_num')
         shift_type = request.POST.get('shift_type')
         if action == 'add':
-            dataAccess.add_or_update_timetable_shift(
-                branch_id=int(branch_id),
-                user_id=request.user.id,
-                chair_num=chair_num,
-                date=date,
-                shift_type=shift_type
-            )
+            if dataAccess.check_timetables(request.user, date, shift_type):
+                messages.warning(request, ' Вы уже занимаете кресло на эту смену и день!')
+            else:
+                dataAccess.add_or_update_timetable_shift(
+                    branch_id=int(branch_id),
+                    user_id=request.user.id,
+                    chair_num=chair_num,
+                    date=date,
+                    shift_type=shift_type
+                )
         elif action == 'del':
             dataAccess.delete_timetable_shift(
                 branch_id=int(branch_id),
