@@ -7,6 +7,7 @@ import re
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 def validate_phone_number(value: str) -> None:
@@ -57,7 +58,11 @@ class User(AbstractUser):
         first_name (str): Имя пользователя.
         last_name (str): Фамилия пользователя.
     """
-    username = PhoneNumberField(unique=True)
-    image = models.ImageField(upload_to='user_images', default='default.jpg')
-    first_name = models.CharField(max_length=150, blank=True)
-    last_name = models.CharField(max_length=150, blank=True)
+    username = PhoneNumberField(unique=True, verbose_name=_('Номер телефона'))
+    image = models.ImageField(upload_to='user_images', default='default.jpg', verbose_name=_('Фото'))
+    first_name = models.CharField(max_length=150, blank=True, verbose_name=_('Имя'))
+    last_name = models.CharField(max_length=150, blank=True, verbose_name=_('Фамилия'))
+
+    class Meta:
+        verbose_name = _('Работника')
+        verbose_name_plural = _('Работники')
