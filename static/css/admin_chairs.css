@@ -1,6 +1,6 @@
 .card_body {
     width: 360px;
-    background-color: #D9D9D9;
+    background-color: #f7f9fc;
     border-radius: 15px;
     padding-bottom: 25px;
 }
@@ -13,7 +13,7 @@
 .card_chair {
     width: 300px;
     height: 150px;
-    border: #AA6009 solid 1px;
+    border: #e6e6e7 solid 1px;
     border-radius: 15px;
 }
 
@@ -22,7 +22,7 @@
     font-size: 14px;
     margin-bottom: 5px;
     height: 1.4rem;
-    border: #AA6009 solid 1px;
+    border: #e6e6e7 solid 1px;
     border-radius: 5px;
 }
 

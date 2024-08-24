@@ -17,10 +17,10 @@
                     </div>
                 {% endif %}
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                    <div class="card-header text-white" style="background: black">
-                        <h3 class="text-center font-weight-light my-4">Регистрация</h3>
+                    <div class="card-header" style="background: #f7f9fc">
+                        <h2 class="text-center font-weight-bolder my-4">Регистрация</h2>
                     </div>
-                    <div class="card-body text-white" style="background: #393C42">
+                    <div class="card-body">
                         <form action="{% url 'users:register' address.id %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-row my-3">

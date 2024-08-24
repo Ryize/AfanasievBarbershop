@@ -17,10 +17,10 @@
                         </div>
                         {% endif %}
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
-                            <div class="card-header text-white" style="background: black">
-                                <h3 class="text-center font-weight-light my-4">Авторизация</h3>
+                            <div class="card-header" style="background: #f7f9fc">
+                                <h1 class="text-center font-weight-bolder my-4">Авторизация</h1>
                             </div>
-                            <div class="card-body text-white" style="background: #393C42">
+                            <div class="card-body">
                                 <form action="{% url 'users:login' %}" method="post">
                                     
                                     {% csrf_token %}

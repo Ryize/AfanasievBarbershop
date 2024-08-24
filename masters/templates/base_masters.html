@@ -14,11 +14,11 @@
     <title>{{ title }}</title>
 </head>
 
-<body class="d-flex flex-column min-vh-100 bg-grey">
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-lg bg-black">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <button class="navbar-toggler ms-auto text-white" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Переключатель навигации">
                     <span class="bi bi-list"> </span>
@@ -59,7 +59,7 @@
     <main class="flex-md-grow-1 d-flex">
         <div class="container-fluid flex-grow-1 d-flex">
             <div class="row flex-grow-1 w-100">
-                <div class="col-12 col-lg-3 bg-dark_grey d-row-flex shadow_r px-xxl-5 px-5 px-lg-2 order-lg-1 order-2">
+                <div class="col-12 col-lg-3 bg-custom d-row-flex shadow_r px-xxl-5 px-5 px-lg-2 order-lg-1 order-2">
                     <div class="container">
                         <div class="row mt-5">
                             <div class="col-12">
@@ -101,7 +101,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col-12 col-md-9 bg-grey order-lg-2 order-1">
+                <div class="col-12 col-md-9 order-lg-2 order-1">
                     {% block content %}
 {#                        Здесь календарь#}
                     {% endblock %}

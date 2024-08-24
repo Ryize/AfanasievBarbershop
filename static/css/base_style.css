@@ -54,40 +54,26 @@ body {
     min-width: 100px;
     font-family: inherit;
     appearance: none;
-    border: 1px solid white;
+    background: #fac635;
+    color: black;
     border-radius: 15px;
-    color: #fff;
     padding: 20px 28px;
     font-size: 24px;
     cursor: pointer;
     text-decoration: none;
-}
-
-.cus-btn:hover {
-    border: none;
-    box-shadow: 0 0 0 2px var(--red);
-}
-
-.cus-btn:focus {
-    border-color: var(--red);
 }
 
 .log-btn {
     min-width: 100px;
     font-family: inherit;
     appearance: none;
-    border: 1px solid var(--orange);
     border-radius: 15px;
-    color: #fff;
+    background: #fac635;
     padding: 20px 28px;
     font-size: 24px;
     cursor: pointer;
     text-decoration: none;
-}
-
-.log-btn:hover {
-    border: none;
-    box-shadow: 0 0 0 4px var(--orange);
+    color: black;
 }
 
 .nav-filial {
@@ -95,12 +81,11 @@ body {
 }
 
 .cus-filial {
-    background-color: black;
     min-width: 100px;
     font-family: inherit;
     border: none;
     appearance: none;
-    color: #fff;
+    color: black;
     padding: 20px 28px;
     font-size: 24px;
     cursor: pointer;
@@ -119,9 +104,9 @@ body {
         min-width: 50px;
         font-family: inherit;
         appearance: none;
-        border: 1px solid var(--orange);
         border-radius: 15px;
-        color: #fff;
+        color: black;
+        background: #fac635;;
         padding: 10px 18px;
         font-size: 20px;
         cursor: pointer;
@@ -136,5 +121,5 @@ body {
 
 .day-btn:hover {
     border: none;
-    box-shadow: 0px 0px 0px 3px var(--orange);
+    box-shadow: 0 0 0 3 #fac635;;
 }

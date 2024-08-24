@@ -4731,6 +4731,7 @@ input[type=button].btn-block {
 
 .card-title {
     margin-bottom: 0.75rem;
+    font-weight: bolder;
 }
 
 .card-subtitle {
@@ -4755,6 +4756,8 @@ input[type=button].btn-block {
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: bolder;
+
 }
 
 .card-header:first-child {
@@ -10593,7 +10596,7 @@ a.text-dark:hover, a.text-dark:focus {
 html,
 body {
     height: 100%;
-    background: #474A51;
+    background: white;
 }
 
 .container,
@@ -10887,23 +10890,13 @@ body {
     min-width: 100px;
     font-family: inherit;
     appearance: none;
-    border: 1px solid var(--orange);
     border-radius: 15px;
-    color: #fff;
-    padding: 10px 23px;
-    font-size: 24px;
+    background: #fac635;
+    padding: 12px 20px;
+    font-size: 22px;
     cursor: pointer;
     text-decoration: none;
-}
-
-.log-btn:hover {
-    border: none;
-    box-shadow: 0 0 0 4px var(--orange);
-    color: #fff;
-}
-
-.bg-grey{
-    background: var(--gray);
+    color: black;
 }
 
 body{

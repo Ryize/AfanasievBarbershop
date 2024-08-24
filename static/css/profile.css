@@ -1,7 +1,7 @@
 .card_chair {
-    background-color: #D9D9D9;
+    background-color: #f7f9fc;
     width: 200px;
-    border: #AA6009 solid 1px;
+    border: #e6e6e7 solid 1px;
     border-radius: 15px;
 }
 
@@ -10,14 +10,14 @@
     font-size: 18px;
     margin-bottom: 5px;
     height: 1.4rem;
-    border: #AA6009 solid 1px;
+    border: #e6e6e7 solid 1px;
     border-radius: 5px;
     padding-left: 25px;
 }
 
 .img_master {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     width: 80px;
     height: 80px;
     border: none;
@@ -55,7 +55,7 @@
 }
 
 .name_chair {
-    color: white;
+    color: black;
     margin-bottom: 15px;
 }
 

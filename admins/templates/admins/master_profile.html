@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="my-5 text-center text-white">Профиль</h1>
+                <h1 class="my-5 text-center ">Профиль</h1>
             </div>
             <div class="col-xxl-7">
                 <div class="container">
@@ -23,7 +23,7 @@
                              class="img-thumbnail">
                     </div>
                 </div>
-                <form class="text-white mb-3"  action="{% url 'admins:master' address.id user.id %}" method="post" enctype="multipart/form-data">
+                <form class="mb-3"  action="{% url 'admins:master' address.id user.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="container">
                         <div class="row my-3">
@@ -65,7 +65,7 @@
             </div>
         <div class="row">
             <div class="col-12">
-                <h2 class="my-5 text-center text-white">Расписание</h2>
+                <h2 class="my-5 text-center">Расписание</h2>
             </div>
         </div>
         <div class="container">

@@ -4,21 +4,21 @@
     max-width: 900px;
     margin: 3em auto;
     padding: 2em;
-    border: 1px solid #AA6009;
+    border: 1px solid #e6e6e7;
     border-radius: 5px;
-    background: #393C42;
+    background: #f6f8fb;
 }
 
 table {
     clear: both;
     width: 100%;
-    border: 1px solid #AA6009;
+    border: 1px solid #e6e6e7;
     border-collapse: collapse;
 }
 
 td {
     height: 80px;
-    color: white;
+    color: black;
     text-align: center;
     vertical-align: middle;
 
@@ -35,10 +35,10 @@ td {
 thead td {
     margin-bottom: 15px;
     border: none;
-    color: white;
+    color: black;
     text-transform: uppercase;
     font-size: 40px;
-    text-shadow: 2px 2px 1px black;
+    font-weight: bolder;
 }
 
 @media (max-width: 576px) {
@@ -48,12 +48,12 @@ thead td {
 }
 
 .week_days {
-    text-shadow: 2px 2px 1px #AA6009;
+    font-weight: bold;
 }
 
 @media (max-width: 576px) {
     .week_days {
-        text-shadow: 1px 2px 1px #AA6009;
+        font-weight: bold;
     }
 }
 
@@ -63,7 +63,6 @@ td.not-current {
 
 td.today {
     font-weight: 700;
-    color: #AA6009;
     font-size: 42px;
 }
 
@@ -74,7 +73,8 @@ td.today {
 }
 
 .weekend {
-    color: #922929;
+    color: black;
+    opacity: 70%;
 }
 
 td a {
@@ -108,7 +108,7 @@ td a {
     border: none;
     outline: none;
     font-size: 20px;
-    color: #c0c0c0;
+    color: black;
     cursor: pointer;
     font-family: sans-serif;
     text-transform: uppercase;
@@ -126,15 +126,15 @@ td a {
 #btnPrev:hover,
 #btnNext:hover {
     text-decoration: underline;
-    text-decoration-color: #AA6009;
+    text-decoration-color: #fac635;;
 }
 
 .arrow_l {
-    color: #AA6009;
+    color: #fac635;;
     margin-right: 10px;
 }
 
 .arrow_r {
-    color: #AA6009;
+    color: #fac635;;
     margin-left: 10px;
 }
