@@ -29,7 +29,7 @@ SECRET_KEY = uuid.uuid4()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ryize-afanasievbarbershop-608f.twc1.net', 'www.ryize-afanasievbarbershop-608f.twc1.net']
 
 # Application definition
 
