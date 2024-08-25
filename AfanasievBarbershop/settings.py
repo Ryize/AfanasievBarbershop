@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 import uuid
 import pymysql
 from pathlib import Path
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE'  : 'django.db.backends.mysql',
         'NAME'    : 'u1450880_afanasiev',
         'USER'    : 'u1450880_afanasi',
-        'PASSWORD': '',
+        'PASSWORD': os.getenv('PASSWORD'),
         'HOST'    : 'server102.hosting.reg.ru',
     }
 }
