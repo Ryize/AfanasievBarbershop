@@ -195,4 +195,8 @@
         </div>
     </main>
 {% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/filial.js' %}"></script>
+{% endblock %}
 

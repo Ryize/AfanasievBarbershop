@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% if total_hours_in_month >= 40 %}
+                        {% if total_hours_in_month >= 180 %}
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="enough_hours d-flex">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                    <div>
+                    <div class="mb-4">
                         <a class="btn btn-dark btn_del_master" href="{% url 'admins:del_master' address.id user.id %}">Удалить мастера</a>
                     </div>
                     </div>

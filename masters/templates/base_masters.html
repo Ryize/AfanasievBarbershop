@@ -65,7 +65,7 @@
                             <div class="col-12">
                                 <div class="text-field">
                                     <label class="text-field__label" for="hours_worked_in_month">Колличество отработанных часов</label>
-                                    <input class="text-field__input" type="text" name="hours_worked_in_month" id=""
+                                    <input class="text-field__input" type="text" name="hours_worked_in_month"
                                         placeholder="{{ hours_worked_in_month }}" value="" disabled>
                                 </div>
                             </div>
@@ -75,12 +75,12 @@
                                 <div class="text-field">
                                     <label class="text-field__label" for="total_hours_in_month">Запланированное количество
                                         часов</label>
-                                    <input class="text-field__input" type="text" name="total_hours_in_month" id=""
+                                    <input class="text-field__input" type="text" name="total_hours_in_month"
                                         placeholder="{{ total_hours_in_month }}" value="" disabled>
                                 </div>
                             </div>
                         </div>
-                        {% if total_hours_in_month >= 40 %}
+                        {% if total_hours_in_month >= 180 %}
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="enough_hours d-flex">
@@ -110,8 +110,7 @@
         </div>
     </main>
     {% block js %}
-        <script src="{% static 'js/add_del_masters.js' %}"></script>   
-        <script src="{% static 'js/filial.js' %}"></script>
+        <script src="{% static 'js/add_del_masters.js' %}"></script>
         <script src="{% static 'js/change_day.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
