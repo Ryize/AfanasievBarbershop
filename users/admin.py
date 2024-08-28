@@ -4,7 +4,7 @@ from users.models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-  fields = [field.name for field in User._meta.get_fields()]
+  fields = ('username', 'email', 'password', 'first_name', 'last_name', 'is_staff')
   list_display = ('username',)
   list_display_links = ('username',)
   empty_value_display = '-пустой-'
